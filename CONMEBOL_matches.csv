@@ -1,0 +1,21 @@
+match,team a,team b
+1,Ecuador,Brazil
+2,Paraguay,Uruguay
+3,Chile,Argentina
+4,Venezuela,Bolivia
+5,Colombia,Peru
+6,Bolivia,Chile
+7,Peru,Ecuador
+8,Brazil,Paraguay
+9,Uruguay,Venezuela
+10,Argentina,Colombia
+11,Uruguay,Peru
+12,Colombia,Bolivia
+13,Brazil,Chile
+14,Argentina,Venezuela
+15,Paraguay,Ecuador
+16,Bolivia,Brazil
+17,Ecuador,Argentina
+18,Peru,Paraguay
+19,Chile,Uruguay
+20,Venezuela,Colombia

@@ -26,7 +26,7 @@ rank,name,confed,off,def,spi
 25,Uruguay,CONMEBOL,1.99,0.67,73.98
 26,Austria,UEFA,2.1,0.79,73.08
 27,Iran,AFC,1.86,0.63,73.01
-28,Poland,UEFA,2.06,0.81,72.0
+28,Poland,UEFA,2.06,0.81,72
 29,Japan,AFC,1.8,0.63,71.75
 30,Senegal,CAF,1.98,0.78,71.5
 31,Peru,CONMEBOL,2.07,0.86,71.11
@@ -42,7 +42,7 @@ rank,name,confed,off,def,spi
 41,Russia,UEFA,1.87,0.9,66.62
 42,Ukraine,UEFA,1.81,0.86,66.47
 43,Greece,UEFA,1.55,0.7,65.12
-44,Turkey,UEFA,1.95,1.03,65.0
+44,Turkey,UEFA,1.95,1.03,65
 45,Venezuela,CONMEBOL,1.7,0.84,64.63
 46,Ghana,CAF,1.43,0.66,63.77
 47,Egypt,CAF,1.62,0.82,63.62
@@ -54,7 +54,7 @@ rank,name,confed,off,def,spi
 53,Burkina Faso,CAF,1.38,0.72,60.83
 54,Romania,UEFA,1.64,0.97,60.2
 55,Slovakia,UEFA,1.68,1.05,59.32
-56,Basque Country,UEFA,1.63,1.0,59.32
+56,Basque Country,UEFA,1.63,1,59.32
 57,Finland,UEFA,1.56,0.95,59.19
 58,Guatemala,CONCACAF,1.52,0.93,58.79
 59,Panama,CONCACAF,1.52,0.95,58.21
@@ -69,8 +69,8 @@ rank,name,confed,off,def,spi
 68,Uganda,CAF,1.28,0.86,54.9
 69,Bahrain,AFC,1.61,1.2,54.55
 70,Israel,UEFA,1.8,1.42,53.57
-71,China PR,AFC,1.42,1.08,53.0
-72,Montenegro,UEFA,1.35,1.01,53.0
+71,China PR,AFC,1.42,1.08,53
+72,Montenegro,UEFA,1.35,1.01,53
 73,Costa Rica,CONCACAF,1.23,0.9,52.8
 74,Hungary,UEFA,1.41,1.09,52.58
 75,Iceland,UEFA,1.4,1.08,52.33
@@ -79,7 +79,7 @@ rank,name,confed,off,def,spi
 78,Honduras,CONCACAF,1.44,1.18,51.1
 79,Haiti,CONCACAF,1.37,1.18,49.5
 80,Uzbekistan,AFC,1.4,1.22,49.23
-81,United Arab Emirates,AFC,1.34,1.2,48.29
+81,UAE,AFC,1.34,1.2,48.29
 82,Zambia,CAF,1.46,1.37,47.51
 83,Namibia,CAF,1.13,1.02,47.49
 84,Gabon,CAF,1.28,1.17,47.47
@@ -112,20 +112,20 @@ rank,name,confed,off,def,spi
 111,Malawi,CAF,0.83,1.1,37.51
 112,Mauritania,CAF,0.88,1.17,37.38
 113,Jordan,AFC,0.94,1.25,37.18
-114,Trinidad and Tobago,CONCACAF,1.0,1.34,37.02
+114,Trinidad and Tobago,CONCACAF,1,1.34,37.02
 115,Guinea-Bissau,CAF,1.13,1.52,36.66
 116,Sudan,CAF,1.04,1.49,35.11
 117,Azerbaijan,UEFA,0.95,1.43,34.08
 118,Mozambique,CAF,0.9,1.39,33.55
 119,Comoros,CAF,1.02,1.55,33.46
-120,Sierra Leone,CAF,1.0,1.52,33.44
+120,Sierra Leone,CAF,1,1.52,33.44
 121,Cuba,CONCACAF,0.85,1.34,33.12
 122,Rwanda,CAF,0.75,1.21,33.09
 123,Vietnam,AFC,0.87,1.38,32.9
 124,Palestine,AFC,0.89,1.46,31.93
 125,Madagascar,CAF,1.07,1.69,31.91
 126,Burundi,CAF,0.84,1.41,31.72
-127,Nicaragua,CONCACAF,1.0,1.62,31.64
+127,Nicaragua,CONCACAF,1,1.62,31.64
 128,Faroe Islands,UEFA,1.01,1.64,31.63
 129,Kuwait,AFC,0.84,1.42,31.33
 130,Lithuania,UEFA,0.99,1.65,30.99
@@ -202,7 +202,7 @@ rank,name,confed,off,def,spi
 201,Cambodia,AFC,0.35,3.36,4.06
 202,Guam,AFC,0.49,4.18,2.92
 203,Brunei,AFC,0.21,3.71,2.13
-204,Sri Lanka,AFC,0.28,4.0,2.0
+204,Sri Lanka,AFC,0.28,4,2
 205,St. Martin,CONCACAF,0.29,4.19,1.78
 206,Pakistan,AFC,0.2,3.92,1.71
 207,Laos,AFC,0.2,4.07,1.49

@@ -1,0 +1,17 @@
+match,team a,team b
+1,Tonga,Cook Islands
+2,Solomon Islands,Tahiti
+3,Solomon Islands,Vanuatu
+4,Solomon Islands,QMW
+5,Tahiti,Vanuatu
+6,Tahiti,QMW
+7,Vanuatu,QMW
+8,New Zealand,New Caledonia
+9,New Zealand,Fiji
+10,New Zealand,Papua New Guinea
+11,New Caledonia,Fiji
+12,New Caledonia,Papua New Guinea
+13,Fiji,Papua New Guinea
+14,GA1,GB2
+15,GA2,GB1
+16,14W,15W

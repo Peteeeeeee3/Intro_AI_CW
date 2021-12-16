@@ -1,0 +1,29 @@
+match,team a,team b
+1,Jamaica,Mexico
+2,Honduras,Canada
+3,USA,El Salvador
+4,Costa Rica,Panama
+5,Honduras,El Salvador
+6,Panama,Jamaica
+7,Canada,USA
+8,Mexico,Costa Rica
+9,Jamaica,Costa Rica
+10,USA,Honduras
+11,Mexico,Panama
+12,El Salvador,Canada
+13,Jamaica,El Salvador
+14,Panama,Honduras
+15,Mexico,USA
+16,El Salvador,Canada
+17,Jamaica,El Salvador
+18,Panama,Honduras
+19,Mexico,USA
+20,Costa Rica,Canada
+21,USA,Panama
+22,Honduras,Mexico
+23,El Salvador,Costa Rica
+24,Canada,Jamaica
+25,Mexico,El Salvador
+26,Jamaica,Honduras
+27,Panama,Canada
+28,Costa Rica,USA

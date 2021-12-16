@@ -1,0 +1,26 @@
+match,team a ,team b
+1,Japan,China
+2,Saudi Arabia,Oman
+3,Australia,Vietnam
+4,UAE,Syria
+5,Iran,Iraq
+6,Lebanon,South Korea
+7,Oman,Australia
+8,Japan,Saudi Arabia
+9,Vietnam,China
+10,Lebanon,Iraq
+11,Iran,UAE
+12,Syria,South Korea
+13,Australia,Japan
+14,Vietnam,Oman
+15,China,Saudi Arabia
+16,Iraq,UAE
+17,Lebanon,Syria
+18,South Korea,Iran
+19,Oman,China
+20,Saudi Arabia,Australia
+21,Japan,Vietnam
+22,Syria,Iraq
+23,UAE,South Korea
+24,Iran,Lebanon
+25,a3,b3
