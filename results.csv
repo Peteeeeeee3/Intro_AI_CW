@@ -304,7 +304,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 08/04/2000,New Caledonia,Solomon Islands,4,2,Oceania Nations Cup qualification,Suva,Fiji,TRUE
 08/04/2000,Pakistan,Kazakhstan,0,4,AFC Asian Cup qualification,Doha,Qatar,TRUE
 08/04/2000,Qatar,Jordan,2,2,AFC Asian Cup qualification,Doha,Qatar,FALSE
-08/04/2000,S„o TomÈ and PrÌncipe,Sierra Leone,2,0,FIFA World Cup qualification,S√£o Tom√©,S√£o Tom√© and Pr√≠ncipe,FALSE
+08/04/2000,Sao Tome and Principe,Sierra Leone,2,0,FIFA World Cup qualification,S√£o Tom√©,S√£o Tom√© and Pr√≠ncipe,FALSE
 08/04/2000,Seychelles,Namibia,1,1,FIFA World Cup qualification,Victoria,Seychelles,FALSE
 08/04/2000,Tanzania,Ghana,0,1,FIFA World Cup qualification,Arusha,Tanzania,FALSE
 08/04/2000,Thailand,Malaysia,3,2,AFC Asian Cup qualification,Bangkok,Thailand,FALSE
@@ -358,7 +358,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 22/04/2000,Morocco,Gambia,2,0,FIFA World Cup qualification,Casablanca,Morocco,FALSE
 22/04/2000,Namibia,Seychelles,3,0,FIFA World Cup qualification,Windhoek,Namibia,FALSE
 22/04/2000,Nigeria,Eritrea,4,0,FIFA World Cup qualification,Lagos,Nigeria,FALSE
-22/04/2000,Sierra Leone,S„o TomÈ and PrÌncipe,4,0,FIFA World Cup qualification,Freetown,Sierra Leone,FALSE
+22/04/2000,Sierra Leone,Sao Tome and Principe,4,0,FIFA World Cup qualification,Freetown,Sierra Leone,FALSE
 22/04/2000,South Africa,Lesotho,1,0,FIFA World Cup qualification,Bloemfontein,South Africa,FALSE
 22/04/2000,Saint Kitts and Nevis,Saint Vincent and the Grenadines,1,2,FIFA World Cup qualification,Basseterre,Saint Kitts and Nevis,FALSE
 22/04/2000,Tunisia,Mauritania,3,0,FIFA World Cup qualification,Tunis,Tunisia,FALSE
@@ -665,7 +665,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 14/07/2000,Libya,Chad,3,1,African Cup of Nations qualification,Tripoli,Libya,FALSE
 15/07/2000,Burundi,Djibouti,1,0,African Cup of Nations qualification,Bujumbura,Burundi,FALSE
 15/07/2000,Eritrea,Sudan,2,1,African Cup of Nations qualification,Asmara,Eritrea,FALSE
-15/07/2000,Gabon,S„o TomÈ and PrÌncipe,4,1,African Cup of Nations qualification,Libreville,Gabon,FALSE
+15/07/2000,Gabon,Sao Tome and Principe,4,1,African Cup of Nations qualification,Libreville,Gabon,FALSE
 15/07/2000,Kenya,Eswatini,3,0,African Cup of Nations qualification,Nairobi,Kenya,FALSE
 15/07/2000,Malawi,Uganda,1,2,African Cup of Nations qualification,Blantyre,Malawi,FALSE
 15/07/2000,Namibia,Benin,8,2,African Cup of Nations qualification,Windhoek,Namibia,FALSE
@@ -3528,7 +3528,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 11/10/2003,Portugal,Albania,5,3,Friendly,Lisbon,Portugal,FALSE
 11/10/2003,Romania,Japan,1,1,Friendly,Bucharest,Romania,FALSE
 11/10/2003,Russia,Georgia,3,1,UEFA Euro qualification,Moscow,Russia,FALSE
-11/10/2003,S„o TomÈ and PrÌncipe,Libya,0,1,FIFA World Cup qualification,S√£o Tom√©,S√£o Tom√© and Pr√≠ncipe,FALSE
+11/10/2003,Sao Tome and Principe,Libya,0,1,FIFA World Cup qualification,S√£o Tom√©,S√£o Tom√© and Pr√≠ncipe,FALSE
 11/10/2003,Scotland,Lithuania,1,0,UEFA Euro qualification,Glasgow,Scotland,FALSE
 11/10/2003,Seychelles,Zambia,0,4,FIFA World Cup qualification,Victoria,Seychelles,FALSE
 11/10/2003,South Africa,Costa Rica,2,1,Friendly,Potchefstroom,South Africa,FALSE
@@ -3600,7 +3600,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 10/11/2003,Hong Kong,Thailand,2,1,AFC Asian Cup qualification,Tashkent,Uzbekistan,TRUE
 10/11/2003,Uzbekistan,Tajikistan,0,0,AFC Asian Cup qualification,Tashkent,Uzbekistan,FALSE
 11/11/2003,Uganda,Tanzania,2,1,Friendly,Kampala,Uganda,FALSE
-12/11/2003,Equatorial Guinea,S„o TomÈ and PrÌncipe,3,1,Friendly,Malabo,Equatorial Guinea,FALSE
+12/11/2003,Equatorial Guinea,Sao Tome and Principe,3,1,Friendly,Malabo,Equatorial Guinea,FALSE
 12/11/2003,Iran,North Korea,3,0,AFC Asian Cup qualification,Teheran,Iran,FALSE
 12/11/2003,Lebanon,Jordan,0,2,AFC Asian Cup qualification,Beirut,Lebanon,FALSE
 12/11/2003,Poland,Italy,3,1,Friendly,Warsaw,Poland,FALSE
@@ -3641,7 +3641,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 16/11/2003,Jamaica,El Salvador,3,0,Friendly,Kingston,Jamaica,FALSE
 16/11/2003,Lesotho,Botswana,0,0,FIFA World Cup qualification,Maseru,Lesotho,FALSE
 16/11/2003,Liberia,Gambia,3,0,FIFA World Cup qualification,Monrovia,Liberia,FALSE
-16/11/2003,Libya,S„o TomÈ and PrÌncipe,8,0,FIFA World Cup qualification,Benghazi,Libya,FALSE
+16/11/2003,Libya,Sao Tome and Principe,8,0,FIFA World Cup qualification,Benghazi,Libya,FALSE
 16/11/2003,Mauritius,Uganda,3,1,FIFA World Cup qualification,Curepipe,Mauritius,FALSE
 16/11/2003,Mozambique,Guinea,3,4,FIFA World Cup qualification,Maputo,Mozambique,FALSE
 16/11/2003,Peru,Brazil,1,1,FIFA World Cup qualification,Lima,Peru,FALSE
@@ -11213,7 +11213,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 11/11/2011,Poland,Italy,0,2,Friendly,Wroc≈Çaw,Poland,FALSE
 11/11/2011,Puerto Rico,Saint Lucia,4,0,FIFA World Cup qualification,Bayam√≥n,Puerto Rico,FALSE
 11/11/2011,Qatar,Indonesia,4,0,FIFA World Cup qualification,Doha,Qatar,FALSE
-11/11/2011,S„o TomÈ and PrÌncipe,Congo,0,5,FIFA World Cup qualification,S√£o Tom√©,S√£o Tom√© and Pr√≠ncipe,FALSE
+11/11/2011,Sao Tome and Principe,Congo,0,5,FIFA World Cup qualification,S√£o Tom√©,S√£o Tom√© and Pr√≠ncipe,FALSE
 11/11/2011,Saudi Arabia,Thailand,3,0,FIFA World Cup qualification,Riyadh,Saudi Arabia,FALSE
 11/11/2011,Seychelles,Kenya,0,3,FIFA World Cup qualification,Victoria,Seychelles,FALSE
 11/11/2011,Saint Kitts and Nevis,Canada,0,0,FIFA World Cup qualification,Basseterre,Saint Kitts and Nevis,FALSE
@@ -11245,7 +11245,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 15/11/2011,Canada,Saint Kitts and Nevis,4,0,FIFA World Cup qualification,Toronto,Canada,FALSE
 15/11/2011,Chile,Paraguay,2,0,FIFA World Cup qualification,Santiago,Chile,FALSE
 15/11/2011,Colombia,Argentina,1,2,FIFA World Cup qualification,Barranquilla,Colombia,FALSE
-15/11/2011,Congo,S„o TomÈ and PrÌncipe,1,1,FIFA World Cup qualification,Pointe-Noire,Congo,FALSE
+15/11/2011,Congo,Sao Tome and Principe,1,1,FIFA World Cup qualification,Pointe-Noire,Congo,FALSE
 15/11/2011,DR Congo,Eswatini,5,1,FIFA World Cup qualification,Kinshasa,DR Congo,FALSE
 15/11/2011,Costa Rica,Spain,2,2,Friendly,San Jos√©,Costa Rica,FALSE
 15/11/2011,Croatia,Turkey,0,0,UEFA Euro qualification,Zagreb,Croatia,FALSE
@@ -11368,7 +11368,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 14/01/2012,Angola,Sierra Leone,3,1,Friendly,Cabinda,Angola,FALSE
 14/01/2012,Zambia,Namibia,0,0,Friendly,Johannesburg,South Africa,TRUE
 15/01/2012,Oman,DR Congo,2,2,Friendly,Muscat,Oman,FALSE
-15/01/2012,S„o TomÈ and PrÌncipe,Lesotho,1,0,African Cup of Nations qualification,S√£o Tom√©,S√£o Tom√© and Pr√≠ncipe,FALSE
+15/01/2012,Sao Tome and Principe,Lesotho,1,0,African Cup of Nations qualification,S√£o Tom√©,S√£o Tom√© and Pr√≠ncipe,FALSE
 16/01/2012,Gabon,Sudan,0,0,Friendly,Franceville,Gabon,FALSE
 16/01/2012,Ivory Coast,Libya,1,0,Friendly,Abu Dhabi,United Arab Emirates,TRUE
 17/01/2012,Kuwait,Uzbekistan,1,0,Friendly,Kuwait City,Kuwait,FALSE
@@ -11380,7 +11380,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 22/01/2012,Burkina Faso,Angola,1,2,African Cup of Nations,Malabo,Equatorial Guinea,TRUE
 22/01/2012,Ivory Coast,Sudan,1,0,African Cup of Nations,Malabo,Equatorial Guinea,TRUE
 22/01/2012,Lebanon,Iraq,1,0,Friendly,Beirut,Lebanon,FALSE
-22/01/2012,Lesotho,S„o TomÈ and PrÌncipe,0,0,African Cup of Nations qualification,Maseru,Lesotho,FALSE
+22/01/2012,Lesotho,Sao Tome and Principe,0,0,African Cup of Nations qualification,Maseru,Lesotho,FALSE
 22/01/2012,Trinidad and Tobago,Finland,2,3,Friendly,Port of Spain,Trinidad and Tobago,FALSE
 23/01/2012,Gabon,Niger,2,0,African Cup of Nations,Libreville,Gabon,FALSE
 23/01/2012,Morocco,Tunisia,1,2,African Cup of Nations,Libreville,Gabon,TRUE
@@ -11490,7 +11490,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 29/02/2012,Poland,Portugal,0,0,Friendly,Warsaw,Poland,FALSE
 29/02/2012,Romania,Uruguay,1,1,Friendly,Bucharest,Romania,FALSE
 29/02/2012,Rwanda,Nigeria,0,0,African Cup of Nations qualification,Kigali,Rwanda,FALSE
-29/02/2012,S„o TomÈ and PrÌncipe,Sierra Leone,2,1,African Cup of Nations qualification,S√£o Tom√©,S√£o Tom√© and Pr√≠ncipe,FALSE
+29/02/2012,Sao Tome and Principe,Sierra Leone,2,1,African Cup of Nations qualification,S√£o Tom√©,S√£o Tom√© and Pr√≠ncipe,FALSE
 29/02/2012,Seychelles,DR Congo,0,4,African Cup of Nations qualification,Victoria,Seychelles,FALSE
 29/02/2012,Slovenia,Scotland,1,1,Friendly,Koper,Slovenia,FALSE
 29/02/2012,South Africa,Senegal,0,0,Friendly,Durban,South Africa,FALSE
@@ -11779,7 +11779,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 16/06/2012,Namibia,Liberia,0,0,African Cup of Nations qualification,Windhoek,Namibia,FALSE
 16/06/2012,Nigeria,Rwanda,2,0,African Cup of Nations qualification,Calabar,Nigeria,FALSE
 16/06/2012,Poland,Czech Republic,0,1,UEFA Euro,Wroc≈Çaw,Poland,FALSE
-16/06/2012,Sierra Leone,S„o TomÈ and PrÌncipe,4,2,African Cup of Nations qualification,Freetown,Sierra Leone,FALSE
+16/06/2012,Sierra Leone,Sao Tome and Principe,4,2,African Cup of Nations qualification,Freetown,Sierra Leone,FALSE
 16/06/2012,Uganda,Congo,4,0,African Cup of Nations qualification,Kampala,Uganda,FALSE
 17/06/2012,Benin,Ethiopia,1,1,African Cup of Nations qualification,Cotonou,Benin,FALSE
 17/06/2012,DR Congo,Seychelles,3,0,African Cup of Nations qualification,Kinshasa,DR Congo,FALSE
@@ -13475,7 +13475,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 17/05/2014,Mauritania,Equatorial Guinea,1,0,African Cup of Nations qualification,Nouakchott,Mauritania,FALSE
 17/05/2014,Namibia,Congo,1,0,African Cup of Nations qualification,Windhoek,Namibia,FALSE
 17/05/2014,Netherlands,Ecuador,1,1,Friendly,Amsterdam,Netherlands,FALSE
-17/05/2014,S„o TomÈ and PrÌncipe,Benin,0,2,African Cup of Nations qualification,S√£o Tom√©,S√£o Tom√© and Pr√≠ncipe,FALSE
+17/05/2014,Sao Tome and Principe,Benin,0,2,African Cup of Nations qualification,S√£o Tom√©,S√£o Tom√© and Pr√≠ncipe,FALSE
 18/05/2014,Belarus,Iran,0,0,Friendly,Kapfenberg,Austria,TRUE
 18/05/2014,Burundi,Botswana,0,0,African Cup of Nations qualification,Bujumbura,Burundi,FALSE
 18/05/2014,Central African Republic,Guinea-Bissau,0,0,African Cup of Nations qualification,Brazzaville,Congo,TRUE
@@ -13566,7 +13566,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 31/05/2014,Sierra Leone,Eswatini,1,0,African Cup of Nations qualification,Freetown,Sierra Leone,FALSE
 31/05/2014,Uganda,Madagascar,1,0,African Cup of Nations qualification,Kampala,Uganda,FALSE
 01/06/2014,Aruba,British Virgin Islands,7,0,CFU Caribbean Cup qualification,Oranjestad,Aruba,FALSE
-01/06/2014,Benin,S„o TomÈ and PrÌncipe,2,0,African Cup of Nations qualification,Porto-Novo,Benin,FALSE
+01/06/2014,Benin,Sao Tome and Principe,2,0,African Cup of Nations qualification,Porto-Novo,Benin,FALSE
 01/06/2014,Botswana,Burundi,1,0,African Cup of Nations qualification,Lobatse,Botswana,FALSE
 01/06/2014,Congo,Namibia,3,0,African Cup of Nations qualification,Pointe-Noire,Congo,FALSE
 01/06/2014,Equatorial Guinea,Mauritania,3,0,African Cup of Nations qualification,Malabo,Equatorial Guinea,FALSE
@@ -14541,7 +14541,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 13/06/2015,Argentina,Paraguay,2,2,Copa Am√©rica,La Serena,Chile,TRUE
 13/06/2015,Armenia,Portugal,2,3,UEFA Euro qualification,Yerevan,Armenia,FALSE
 13/06/2015,Burkina Faso,Comoros,2,0,African Cup of Nations qualification,Ouagadougou,Burkina Faso,FALSE
-13/06/2015,Cape Verde,S„o TomÈ and PrÌncipe,7,1,African Cup of Nations qualification,Praia,Cape Verde,FALSE
+13/06/2015,Cape Verde,Sao Tome and Principe,7,1,African Cup of Nations qualification,Praia,Cape Verde,FALSE
 13/06/2015,Denmark,Serbia,2,0,UEFA Euro qualification,Copenhagen,Denmark,FALSE
 13/06/2015,Faroe Islands,Greece,2,1,UEFA Euro qualification,T√≥rshavn,Faroe Islands,FALSE
 13/06/2015,Finland,Hungary,0,1,UEFA Euro qualification,Helsinki,Finland,FALSE
@@ -14794,7 +14794,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 05/09/2015,Russia,Sweden,1,0,UEFA Euro qualification,Moscow,Russia,FALSE
 05/09/2015,Rwanda,Ghana,0,1,African Cup of Nations qualification,Kigali,Rwanda,FALSE
 05/09/2015,San Marino,England,0,6,UEFA Euro qualification,Serravalle,San Marino,FALSE
-05/09/2015,S„o TomÈ and PrÌncipe,Morocco,0,3,African Cup of Nations qualification,S√£o Tom√©,S√£o Tom√© and Pr√≠ncipe,FALSE
+05/09/2015,Sao Tome and Principe,Morocco,0,3,African Cup of Nations qualification,S√£o Tom√©,S√£o Tom√© and Pr√≠ncipe,FALSE
 05/09/2015,Seychelles,Ethiopia,1,1,African Cup of Nations qualification,Victoria,Seychelles,FALSE
 05/09/2015,South Sudan,Equatorial Guinea,1,0,African Cup of Nations qualification,Juba,South Sudan,FALSE
 05/09/2015,Spain,Slovakia,2,0,UEFA Euro qualification,Oviedo,Spain,FALSE
@@ -14893,7 +14893,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 08/10/2015,Portugal,Denmark,1,0,UEFA Euro qualification,Braga,Portugal,FALSE
 08/10/2015,Qatar,China PR,1,0,FIFA World Cup qualification,Doha,Qatar,FALSE
 08/10/2015,Romania,Finland,1,1,UEFA Euro qualification,Bucharest,Romania,FALSE
-08/10/2015,S„o TomÈ and PrÌncipe,Ethiopia,1,0,FIFA World Cup qualification,S√£o Tom√©,S√£o Tom√© and Pr√≠ncipe,FALSE
+08/10/2015,Sao Tome and Principe,Ethiopia,1,0,FIFA World Cup qualification,S√£o Tom√©,S√£o Tom√© and Pr√≠ncipe,FALSE
 08/10/2015,Saudi Arabia,United Arab Emirates,2,1,FIFA World Cup qualification,Jeddah,Saudi Arabia,FALSE
 08/10/2015,Scotland,Poland,2,2,UEFA Euro qualification,Glasgow,Scotland,FALSE
 08/10/2015,Singapore,Afghanistan,1,0,FIFA World Cup qualification,Kallang,Singapore,FALSE
@@ -14935,7 +14935,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 11/10/2015,Armenia,Albania,0,3,UEFA Euro qualification,Yerevan,Armenia,FALSE
 11/10/2015,Denmark,France,1,2,Friendly,Copenhagen,Denmark,FALSE
 11/10/2015,Egypt,Zambia,3,0,Friendly,Abu Dhabi,United Arab Emirates,TRUE
-11/10/2015,Ethiopia,S„o TomÈ and PrÌncipe,3,0,FIFA World Cup qualification,Addis Abeba,Ethiopia,FALSE
+11/10/2015,Ethiopia,Sao Tome and Principe,3,0,FIFA World Cup qualification,Addis Abeba,Ethiopia,FALSE
 11/10/2015,Faroe Islands,Romania,0,3,UEFA Euro qualification,T√≥rshavn,Faroe Islands,FALSE
 11/10/2015,Finland,Northern Ireland,1,1,UEFA Euro qualification,Helsinki,Finland,FALSE
 11/10/2015,Germany,Georgia,2,1,UEFA Euro qualification,Leipzig,Germany,FALSE
@@ -15266,7 +15266,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 23/03/2016,Martinique,British Virgin Islands,3,0,CFU Caribbean Cup qualification,Fort-de-France,Martinique,FALSE
 23/03/2016,Poland,Serbia,1,0,Friendly,Pozna≈Ñ,Poland,FALSE
 23/03/2016,Romania,Lithuania,1,0,Friendly,Giurgiu,Romania,FALSE
-23/03/2016,S„o TomÈ and PrÌncipe,Libya,2,1,African Cup of Nations qualification,S√£o Tom√©,S√£o Tom√© and Pr√≠ncipe,FALSE
+23/03/2016,Sao Tome and Principe,Libya,2,1,African Cup of Nations qualification,S√£o Tom√©,S√£o Tom√© and Pr√≠ncipe,FALSE
 23/03/2016,Slovenia,North Macedonia,1,0,Friendly,Koper,Slovenia,FALSE
 23/03/2016,South Sudan,Benin,1,2,African Cup of Nations qualification,Juba,South Sudan,FALSE
 23/03/2016,Zambia,Congo,1,1,African Cup of Nations qualification,Ndola,Zambia,FALSE
@@ -15355,7 +15355,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 28/03/2016,Andorra,Moldova,0,1,Friendly,Paola,Malta,TRUE
 28/03/2016,Central African Republic,Madagascar,2,1,African Cup of Nations qualification,Bangui,Central African Republic,FALSE
 28/03/2016,Equatorial Guinea,Mali,0,1,African Cup of Nations qualification,Malabo,Equatorial Guinea,FALSE
-28/03/2016,Libya,S„o TomÈ and PrÌncipe,4,0,African Cup of Nations qualification,Cairo,Egypt,TRUE
+28/03/2016,Libya,Sao Tome and Principe,4,0,African Cup of Nations qualification,Cairo,Egypt,TRUE
 28/03/2016,Liechtenstein,Faroe Islands,2,3,Friendly,Marbella,Spain,TRUE
 28/03/2016,Northern Ireland,Slovenia,1,0,Friendly,Belfast,Northern Ireland,FALSE
 28/03/2016,Sierra Leone,Gabon,1,0,Friendly,Freetown,Sierra Leone,FALSE
@@ -16207,7 +16207,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 22/03/2017,Djibouti,South Sudan,2,0,African Cup of Nations qualification,Djibouti,Djibouti,FALSE
 22/03/2017,Germany,England,1,0,Friendly,Dortmund,Germany,FALSE
 22/03/2017,Philippines,Malaysia,0,0,Friendly,Manila,Philippines,FALSE
-22/03/2017,S„o TomÈ and PrÌncipe,Madagascar,0,1,African Cup of Nations qualification,S√£o Tom√©,S√£o Tom√© and Pr√≠ncipe,FALSE
+22/03/2017,Sao Tome and Principe,Madagascar,0,1,African Cup of Nations qualification,S√£o Tom√©,S√£o Tom√© and Pr√≠ncipe,FALSE
 22/03/2017,Scotland,Canada,1,1,Friendly,Edinburgh,Scotland,FALSE
 22/03/2017,Vietnam,Taiwan,1,1,Friendly,Hanoi,Vietnam,FALSE
 22/03/2017,Yemen,Palestine,0,1,Friendly,al-Wakrah,Qatar,TRUE
@@ -16265,7 +16265,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 26/03/2017,Barbados,Martinique,2,1,Friendly,Bridgetown,Barbados,FALSE
 26/03/2017,England,Lithuania,2,0,FIFA World Cup qualification,London,England,FALSE
 26/03/2017,Kenya,DR Congo,2,1,Friendly,Machakos,Kenya,FALSE
-26/03/2017,Madagascar,S„o TomÈ and PrÌncipe,3,2,African Cup of Nations qualification,Antananarivo,Madagascar,FALSE
+26/03/2017,Madagascar,Sao Tome and Principe,3,2,African Cup of Nations qualification,Antananarivo,Madagascar,FALSE
 26/03/2017,Malta,Slovakia,1,3,FIFA World Cup qualification,Attard,Malta,FALSE
 26/03/2017,Montenegro,Poland,1,2,FIFA World Cup qualification,Podgorica,Montenegro,FALSE
 26/03/2017,Northern Ireland,Norway,2,0,FIFA World Cup qualification,Belfast,Northern Ireland,FALSE
@@ -16655,7 +16655,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 05/08/2017,Zambia,Ethiopia,0,0,Friendly,Lusaka,Zambia,FALSE
 07/08/2017,Rwanda,Sudan,2,1,Friendly,Kigali,Rwanda,FALSE
 11/08/2017,Congo,DR Congo,0,0,African Nations Championship,Brazzaville,Congo,FALSE
-12/08/2017,S„o TomÈ and PrÌncipe,Cameroon,0,2,African Nations Championship,S√£o Tom√©,S√£o Tom√© and Pr√≠ncipe,FALSE
+12/08/2017,Sao Tome and Principe,Cameroon,0,2,African Nations Championship,S√£o Tom√©,S√£o Tom√© and Pr√≠ncipe,FALSE
 12/08/2017,Algeria,Libya,1,2,African Nations Championship,Constantine,Algeria,FALSE
 12/08/2017,Burkina Faso,Ghana,2,2,African Nations Championship,Ouagadougou,Burkina Faso,FALSE
 13/08/2017,Egypt,Morocco,1,1,African Nations Championship,Alexandria,Egypt,FALSE
@@ -16664,7 +16664,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 18/08/2017,Libya,Algeria,1,1,African Nations Championship,Sfax,Tunisia,TRUE
 18/08/2017,Morocco,Egypt,3,1,African Nations Championship,Rabat,Morocco,FALSE
 19/08/2017,India,Mauritius,2,1,Friendly,Bombay,India,FALSE
-19/08/2017,Cameroon,S„o TomÈ and PrÌncipe,2,0,African Nations Championship,Yaound√©,Cameroon,FALSE
+19/08/2017,Cameroon,Sao Tome and Principe,2,0,African Nations Championship,Yaound√©,Cameroon,FALSE
 19/08/2017,DR Congo,Congo,1,1,African Nations Championship,Kinshasa,DR Congo,FALSE
 19/08/2017,Ivory Coast,Niger,1,0,African Nations Championship,Abidjan,Ivory Coast,FALSE
 20/08/2017,Ghana,Burkina Faso,1,2,African Nations Championship,Kumasi,Ghana,FALSE
@@ -17200,7 +17200,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 24/03/2018,Qatar,Syria,2,2,Friendly,Basra,Iraq,TRUE
 24/03/2018,Sweden,Chile,1,2,Friendly,Solna,Sweden,FALSE
 24/03/2018,Tahiti,New Caledonia,4,3,Friendly,Pirae,Tahiti,FALSE
-24/03/2018,Uganda,S„o TomÈ and PrÌncipe,3,1,Friendly,Kampala,Uganda,FALSE
+24/03/2018,Uganda,Sao Tome and Principe,3,1,Friendly,Kampala,Uganda,FALSE
 24/03/2018,Zambia,South Africa,0,2,Friendly,Ndola,Zambia,FALSE
 25/03/2018,Barbados,Bermuda,0,0,Friendly,Bridgetown,Barbados,FALSE
 25/03/2018,Dominican Republic,Saint Kitts and Nevis,2,1,Friendly,Santiago,Dominican Republic,FALSE
@@ -18569,7 +18569,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 04/09/2019,Ethiopia,Lesotho,0,0,FIFA World Cup qualification,Bahir Dar,Ethiopia,FALSE
 04/09/2019,Liberia,Sierra Leone,3,1,FIFA World Cup qualification,Monrovia,Liberia,FALSE
 04/09/2019,Mauritius,Mozambique,0,1,FIFA World Cup qualification,Belle Vue Maurel,Mauritius,FALSE
-04/09/2019,S„o TomÈ and PrÌncipe,Guinea-Bissau,0,1,FIFA World Cup qualification,S√£o Tom√©,S√£o Tom√© and Pr√≠ncipe,FALSE
+04/09/2019,Sao Tome and Principe,Guinea-Bissau,0,1,FIFA World Cup qualification,S√£o Tom√©,S√£o Tom√© and Pr√≠ncipe,FALSE
 04/09/2019,South Sudan,Equatorial Guinea,1,1,FIFA World Cup qualification,Omdurman,Sudan,TRUE
 05/09/2019,Argentina,Chile,0,0,Friendly,Los Angeles,United States,TRUE
 05/09/2019,Honduras,Puerto Rico,4,0,Friendly,Tegucigalpa,Honduras,FALSE
@@ -18728,7 +18728,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 10/09/2019,Turkmenistan,South Korea,0,2,FIFA World Cup qualification,Ashgabat,Turkmenistan,FALSE
 10/09/2019,Sri Lanka,North Korea,0,1,FIFA World Cup qualification,Colombo,Sri Lanka,FALSE
 10/09/2019,Angola,Gambia,2,1,FIFA World Cup qualification,Luanda,Angola,FALSE
-10/09/2019,Guinea-Bissau,S„o TomÈ and PrÌncipe,2,1,FIFA World Cup qualification,Bissau,Guinea-Bissau,FALSE
+10/09/2019,Guinea-Bissau,Sao Tome and Principe,2,1,FIFA World Cup qualification,Bissau,Guinea-Bissau,FALSE
 10/09/2019,Malawi,Botswana,1,0,FIFA World Cup qualification,Blantyre,Malawi,FALSE
 10/09/2019,Mozambique,Mauritius,2,0,FIFA World Cup qualification,Maputo,Mozambique,FALSE
 10/09/2019,Namibia,Eritrea,2,0,FIFA World Cup qualification,Windhoek,Namibia,FALSE
@@ -18761,7 +18761,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 05/10/2019,Malaysia,Sri Lanka,6,0,Friendly,Kuala Lumpur,Malaysia,FALSE
 09/10/2019,Djibouti,Gambia,1,1,African Cup of Nations qualification,Djibouti,Djibouti,FALSE
 09/10/2019,Liberia,Chad,1,0,African Cup of Nations qualification,Monrovia,Liberia,FALSE
-09/10/2019,Mauritius,S„o TomÈ and PrÌncipe,1,3,African Cup of Nations qualification,Belle Vue Harel,Mauritius,FALSE
+09/10/2019,Mauritius,Sao Tome and Principe,1,3,African Cup of Nations qualification,Belle Vue Harel,Mauritius,FALSE
 09/10/2019,South Sudan,Seychelles,2,1,African Cup of Nations qualification,Omdurman,Sudan,TRUE
 09/10/2019,Bahrain,Azerbaijan,2,3,Friendly,Riffa,Bahrain,FALSE
 09/10/2019,Germany,Argentina,2,2,Friendly,Dortmund,Germany,FALSE
@@ -18849,7 +18849,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 13/10/2019,Kazakhstan,Belgium,0,2,UEFA Euro qualification,Nur-Sultan,Kazakhstan,FALSE
 13/10/2019,Gambia,Djibouti,1,1,African Cup of Nations qualification,Bakau,Gambia,FALSE
 13/10/2019,Chad,Liberia,1,0,African Cup of Nations qualification,N'Djamena,Chad,FALSE
-13/10/2019,S„o TomÈ and PrÌncipe,Mauritius,2,1,African Cup of Nations qualification,S√£o Tom√©,S√£o Tom√© and Pr√≠ncipe,FALSE
+13/10/2019,Sao Tome and Principe,Mauritius,2,1,African Cup of Nations qualification,S√£o Tom√©,S√£o Tom√© and Pr√≠ncipe,FALSE
 13/10/2019,Seychelles,South Sudan,0,1,African Cup of Nations qualification,Victoria,Seychelles,FALSE
 13/10/2019,Benin,Zambia,2,2,Friendly,Benin,Benin,FALSE
 13/10/2019,Brazil,Nigeria,1,1,Friendly,Kallang,Singapore,TRUE
@@ -18948,7 +18948,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 13/11/2019,Namibia,Chad,2,1,African Cup of Nations qualification,Windhoek,Namibia,FALSE
 13/11/2019,Malawi,South Sudan,1,0,African Cup of Nations qualification,Blantyre,Malawi,FALSE
 13/11/2019,Burkina Faso,Uganda,0,0,African Cup of Nations qualification,Ouagadougou,Burkina Faso,FALSE
-13/11/2019,Sudan,S„o TomÈ and PrÌncipe,4,0,African Cup of Nations qualification,Omdurman,Sudan,FALSE
+13/11/2019,Sudan,Sao Tome and Principe,4,0,African Cup of Nations qualification,Omdurman,Sudan,FALSE
 13/11/2019,Angola,Gambia,1,3,African Cup of Nations qualification,Luanda,Angola,FALSE
 13/11/2019,Central African Republic,Burundi,2,0,African Cup of Nations qualification,Bangui,Central African Republic,FALSE
 13/11/2019,Cameroon,Cape Verde,0,0,African Cup of Nations qualification,Yaound√©,Cameroon,FALSE
@@ -19060,7 +19060,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 17/11/2019,Bonaire,Bahamas,1,1,CONCACAF Nations League,Willemstad,Cura√ßao,TRUE
 17/11/2019,Guadeloupe,Turks and Caicos Islands,10,0,CONCACAF Nations League,Les Abymes,Guadeloupe,FALSE
 17/11/2019,Lithuania,New Zealand,1,0,Friendly,Vilnius,Lithuania,FALSE
-18/11/2019,S„o TomÈ and PrÌncipe,Ghana,0,1,African Cup of Nations qualification,S√£o Tom√©,S√£o Tom√© and Pr√≠ncipe,FALSE
+18/11/2019,Sao Tome and Principe,Ghana,0,1,African Cup of Nations qualification,S√£o Tom√©,S√£o Tom√© and Pr√≠ncipe,FALSE
 18/11/2019,Gambia,DR Congo,2,2,African Cup of Nations qualification,Bakau,Gambia,FALSE
 18/11/2019,Cape Verde,Mozambique,2,2,African Cup of Nations qualification,Praia,Cape Verde,FALSE
 18/11/2019,Comoros,Egypt,0,0,African Cup of Nations qualification,Moroni,Comoros,FALSE
@@ -19474,7 +19474,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 24/03/2021,Guinea,Mali,1,0,African Cup of Nations qualification,Clermont-Ferrand,France,TRUE
 24/03/2021,South Sudan,Malawi,0,1,African Cup of Nations qualification,Omdurman,Sudan,TRUE
 24/03/2021,Uganda,Burkina Faso,0,0,African Cup of Nations qualification,Kampala,Uganda,FALSE
-24/03/2021,S„o TomÈ and PrÌncipe,Sudan,0,2,African Cup of Nations qualification,Sao Tom√©,S√£o Tom√© and Pr√≠ncipe,FALSE
+24/03/2021,Sao Tome and Principe,Sudan,0,2,African Cup of Nations qualification,Sao Tom√©,S√£o Tom√© and Pr√≠ncipe,FALSE
 24/03/2021,Rwanda,Mozambique,1,0,African Cup of Nations qualification,Kigali,Rwanda,FALSE
 24/03/2021,Ethiopia,Madagascar,4,0,African Cup of Nations qualification,Bahir Dar,Ethiopia,FALSE
 25/03/2021,Bahrain,Syria,3,1,Friendly,Isa Town,Bahrain,FALSE
@@ -19563,7 +19563,7 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
 28/03/2021,Romania,Germany,0,1,FIFA World Cup qualification,Bucharest,Romania,FALSE
 28/03/2021,Namibia,Guinea,2,1,African Cup of Nations qualification,Windhoek,Namibia,FALSE
 28/03/2021,Mali,Chad,3,0,African Cup of Nations qualification,Bamako,Mali,FALSE
-28/03/2021,Ghana,S„o TomÈ and PrÌncipe,3,1,African Cup of Nations qualification,Cape Coast,Ghana,FALSE
+28/03/2021,Ghana,Sao Tome and Principe,3,1,African Cup of Nations qualification,Cape Coast,Ghana,FALSE
 28/03/2021,Sudan,South Africa,2,0,African Cup of Nations qualification,Omdurman,Sudan,FALSE
 28/03/2021,Tunisia,Equatorial Guinea,2,1,African Cup of Nations qualification,Rad√®s,Tunisia,FALSE
 28/03/2021,Tanzania,Libya,1,0,African Cup of Nations qualification,Dar es Salaam,Tanzania,FALSE
