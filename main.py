@@ -13,6 +13,7 @@ from IPython.display import display
 
 #load dataset
 intl_spi_data = pd.read_csv("spi_global_rankings_intl.csv")
+#results_data = pd.read_csv("results.csv")
 
 display(intl_spi_data.head())
 
