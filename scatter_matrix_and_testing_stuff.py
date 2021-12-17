@@ -105,5 +105,38 @@ def train_predict(classifier, X_train, y_train, X_test, y_test):
     
 from sklearn.svm import SVC
 
-classifier_svc = SVC(random_state=54, kernel='rbf')
-train_predict(classifier_svc, X_train, y_train, X_test, y_test)
+model = SVC(kernel='linear', C=1E10)
+model.fit(X_all, y_all)
+
+def plot_svc_decision_function(model, ax=None, plot_support=True):
+    """Plot the decision function for a 2D SVC"""
+    if ax is None:
+        ax = plt.gca()
+    xlim = ax.get_xlim()
+    ylim = ax.get_ylim()
+    
+    # create grid to evaluate model
+    x = np.linspace(xlim[0], xlim[1], 30)
+    y = np.linspace(ylim[0], ylim[1], 30)
+    Y, X = np.meshgrid(y, x)
+    xy = np.vstack([X.ravel(), Y.ravel()]).T
+    P = model.decision_function(xy).reshape(X.shape)
+    
+    # plot decision boundary and margins
+    ax.contour(X, Y, P, colors='k',
+               levels=[-1, 0, 1], alpha=0.5,
+               linestyles=['--', '-', '--'])
+    
+    # plot support vectors
+    if plot_support:
+        ax.scatter(model.support_vectors_[:, 0],
+                   model.support_vectors_[:, 1],
+                   s=300, linewidth=1, facecolors='none');
+    ax.set_xlim(xlim)
+    ax.set_ylim(ylim)
+    
+plt.scatter(X_all[:, 0], X_all[:, 1], c=y_all, s=50, cmap='autumn')
+plot_svc_decision_function(model)
+
+#classifier_svc = SVC(random_state=54, kernel='rbf')
+#train_predict(classifier_svc, X_train, y_train, X_test, y_test)
