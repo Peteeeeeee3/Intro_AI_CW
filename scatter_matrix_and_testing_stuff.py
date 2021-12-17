@@ -29,23 +29,27 @@ df_r = pd.read_csv(results_data, na_values=['NA', '?'])
 df_spi = pd.read_csv(spi_data, na_values=['NA', '?'])
 
 #merge to find corelation
-df = df_spi.merge(df_r, left_on='name', right_on='home_team')
-df = df.drop(columns=['home_team', 'tournament', 'city', 'country', 'neutral', 'date'])
-print(df)
+#df = df_spi.merge(df_r, left_on='name', right_on='home_team')
+#df = df.drop(columns=['home_team', 'tournament', 'city', 'country', 'neutral', 'date'])
+#print(df)
 
-df.to_excel('output.xlsx', sheet_name='teams, spi & scores')
+#df.to_excel('output.xlsx', sheet_name='teams, spi & scores')
 
 #df = df.select_dtypes(include=['int', 'float'])
 #print(df)
+
+df = pd.read_excel("output.xlsx")
+print(df)
+#df = df.select_dtypes(include=['int', 'float', 'object'])
 
 #scatter matrix
 #pd.plotting.scatter_matrix(df, alpha=0.2, figsize=(15, 10))
 
 #seperate in test and target
-X_all = df.drop(columns=['home_score', 'away_score'])
+X_all = df.drop(columns=['winner'])
 #y_all = df.drop(columns=['rank', 'name', 'confed', 'off', 'def', 'spi', 'away_team'])
-y_all = df['home_score']
-print(y_all)
+y_all = df['winner']
+#print(y_all)
 
 #make all values small
 from sklearn.preprocessing import scale
@@ -72,36 +76,43 @@ X_train, X_test, y_train, y_test = train_test_split(X_all, y_all, test_size=50, 
 
 from time import time
 
-def train_classifier(classifier, X_train, y_train):
-    #time for comparisson
-    start_time = time()
-    classifier.fit(X_train, y_train)
-    end_time = time()
+# def train_classifier(classifier, X_train, y_train):
+#     #time for comparisson
+#     start_time = time()
+#     classifier.fit(X_train, y_train)
+#     end_time = time()
     
-    print("Model trained in: {:.4f}".format(end_time - start_time))
+#     print("Model trained in: {:.4f}".format(end_time - start_time))
     
-from sklearn.metrics import f1_score
+# from sklearn.metrics import f1_score
     
-def predict_labels(classifier, features, target):
-    start_time = time()
-    y_pred = classifier.predict(features)
-    end_time = time()
+# def predict_labels(classifier, features, target):
+#     start_time = time()
+#     y_pred = classifier.predict(features)
+#     end_time = time()
     
-    print("Prediction took: {:.4f}".format(end_time - start_time))
+#     print("Prediction took: {:.4f}".format(end_time - start_time))
     
-    return f1_score(target, y_pred), sum(target == y_pred) / float(len(y_pred))
+#     return f1_score(target, y_pred), sum(target == y_pred) / float(len(y_pred))
 
-def train_predict(classifier, X_train, y_train, X_test, y_test):
-    print("Training {} using a training size of {} . . .".format(classifier.__class__.__name__, len(X_train)))
+# def train_predict(classifier, X_train, y_train, X_test, y_test):
+#     print("Training {} using a training size of {} . . .".format(classifier.__class__.__name__, len(X_train)))
     
-    train_classifier(classifier, X_train, y_train)
+#     train_classifier(classifier, X_train, y_train)
     
-    f1, accuracy = predict_labels(classifier, X_train, y_train)
-    print(f1, accuracy)
-    print("f1 score and accuracy score for training set: {:.4f} , {:.4f}.".format(f1, accuracy))
+#     f1, accuracy = predict_labels(classifier, X_train, y_train)
+#     print(f1, accuracy)
+#     print("f1 score and accuracy score for training set: {:.4f} , {:.4f}.".format(f1, accuracy))
 
-    f1, accuracy = predict_labels(classifier, X_test, y_test)
-    print("f1 score and accuracy score for test set: {:.4f} , {:.4f}.".format(f1 , accuracy))    
+#     f1, accuracy = predict_labels(classifier, X_test, y_test)
+#     print("f1 score and accuracy score for test set: {:.4f} , {:.4f}.".format(f1 , accuracy))    
+    
+    
+#classifier_svc = SVC(random_state=564, kernel='rbf')
+#train_predict(classifier_svc, X_train, y_train, X_test, y_test)
+
+    
+    
     
 from sklearn.svm import SVC
 
@@ -124,19 +135,19 @@ def plot_svc_decision_function(model, ax=None, plot_support=True):
     
     # plot decision boundary and margins
     ax.contour(X, Y, P, colors='k',
-               levels=[-1, 0, 1], alpha=0.5,
-               linestyles=['--', '-', '--'])
+                levels=[-1, 0, 1], alpha=0.5,
+                linestyles=['--', '-', '--'])
     
     # plot support vectors
     if plot_support:
         ax.scatter(model.support_vectors_[:, 0],
-                   model.support_vectors_[:, 1],
-                   s=300, linewidth=1, facecolors='none');
+                    model.support_vectors_[:, 1],
+                    s=300, linewidth=1, facecolors='none');
     ax.set_xlim(xlim)
     ax.set_ylim(ylim)
     
 plt.scatter(X_all[:, 0], X_all[:, 1], c=y_all, s=50, cmap='autumn')
 plot_svc_decision_function(model)
 
-#classifier_svc = SVC(random_state=54, kernel='rbf')
-#train_predict(classifier_svc, X_train, y_train, X_test, y_test)
+# classifier_svc = SVC(random_state=54, kernel='rbf')
+# train_predict(classifier_svc, X_train, y_train, X_test, y_test)
