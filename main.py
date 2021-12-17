@@ -13,18 +13,18 @@ from IPython.display import display
 
 #load dataset
 intl_spi_data = pd.read_csv("spi_global_rankings_intl.csv")
-#results_data = pd.read_csv("results.csv")
+results_data = pd.read_csv("results.csv")
 
-display(intl_spi_data.head())
-
+#define qualified teams and confederations
 qualified_teams = ["Qatar", "Germany", "Denmark", "Brazil", "France", "Belgium",
                    "Croatia", "Spain", "Serbia", "England", "Switzerland", "Netherlans",
                    "Argentina"]
+confederations = ["AFC", "CAF", "CONCACAF", "CONMEBOL", "OFC", "UEFA"]
+
 
 intl_spi_data1 = os.path.join(".", "spi_global_rankings_intl.csv")
-df = pd.read_csv(intl_spi_data1, na_values=['NA', '?'])
+df = pd.read_csv(intl_spi_data, na_values=['NA', '?'])
 
-confederations = ["AFC", "CAF", "CONCACAF", "CONMEBOL", "OFC", "UEFA"]
 
 # Strip non-numeric features from the dataframe
 df = df.select_dtypes(include=['int', 'float'])
@@ -51,4 +51,4 @@ model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 df_compare = pd.DataFrame({'Actual': y_test, 'Predicted': y_pred})
 df_head = df_compare.head(25)
-print(df_compare)
+#print(df_compare)
