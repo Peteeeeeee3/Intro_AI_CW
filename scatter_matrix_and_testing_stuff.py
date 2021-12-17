@@ -33,7 +33,7 @@ df = df_spi.merge(df_r, left_on='name', right_on='home_team')
 df = df.drop(columns=['home_team', 'tournament', 'city', 'country', 'neutral', 'date'])
 print(df)
 
-#df.to_excel('output.xlsx', sheet_name='teams, spi & scores')
+df.to_excel('output.xlsx', sheet_name='teams, spi & scores')
 
 #df = df.select_dtypes(include=['int', 'float'])
 #print(df)
