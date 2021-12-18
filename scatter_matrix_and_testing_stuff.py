@@ -38,9 +38,13 @@ df_spi = pd.read_csv(spi_data, na_values=['NA', '?'])
 #df = df.select_dtypes(include=['int', 'float'])
 #print(df)
 
-df = pd.read_excel("output.xlsx")
+df = pd.read_excel("merge_maestro.xlsx")
+
+df = df.drop(df.index[100 : 19385])
 print(df)
-#df = df.select_dtypes(include=['int', 'float', 'object'])
+df.to_excel('test.xlsx', sheet_name='teams, spi & scores')
+
+df = df.select_dtypes(include=['int', 'float'])
 
 #scatter matrix
 #pd.plotting.scatter_matrix(df, alpha=0.2, figsize=(15, 10))
@@ -51,14 +55,17 @@ X_all = df.drop(columns=['winner'])
 y_all = df['winner']
 #print(y_all)
 
+#print(X_all.shape)
+#print(y_all.shape)
+
 #make all values small
 from sklearn.preprocessing import scale
 
-cols = [['off', 'def', 'spi']]
-for col in cols:
-    X_all[col] = scale(X_all[col])
+# cols = [['off', 'def', 'spi']]
+# for col in cols:
+#     X_all[col] = scale(X_all[col])
     
-print(X_all)
+# print(X_all)
 
 def preprocess_feature(X):
     output = pd.DataFrame(index = X.index)
@@ -68,13 +75,14 @@ def preprocess_feature(X):
         output = output.join(col_data)
     return output
 
-X_all = preprocess_feature(X_all)
+
+#X_all = preprocess_feature(X_all)
 #print("Processed feature columns ({} total features):\n{}".format(len(X_all.columns), list(X_all.columns)))
 
 #shuffle and split into training and testing data
-X_train, X_test, y_train, y_test = train_test_split(X_all, y_all, test_size=50, random_state=71)
+X_train, X_test, y_train, y_test = train_test_split(X_all, y_all, test_size=0.4, random_state=71)
 
-from time import time
+# from time import time
 
 # def train_classifier(classifier, X_train, y_train):
 #     #time for comparisson
@@ -108,46 +116,106 @@ from time import time
 #     print("f1 score and accuracy score for test set: {:.4f} , {:.4f}.".format(f1 , accuracy))    
     
     
-#classifier_svc = SVC(random_state=564, kernel='rbf')
-#train_predict(classifier_svc, X_train, y_train, X_test, y_test)
-
-    
-    
-    
-from sklearn.svm import SVC
-
-model = SVC(kernel='linear', C=1E10)
-model.fit(X_all, y_all)
-
-def plot_svc_decision_function(model, ax=None, plot_support=True):
-    """Plot the decision function for a 2D SVC"""
-    if ax is None:
-        ax = plt.gca()
-    xlim = ax.get_xlim()
-    ylim = ax.get_ylim()
-    
-    # create grid to evaluate model
-    x = np.linspace(xlim[0], xlim[1], 30)
-    y = np.linspace(ylim[0], ylim[1], 30)
-    Y, X = np.meshgrid(y, x)
-    xy = np.vstack([X.ravel(), Y.ravel()]).T
-    P = model.decision_function(xy).reshape(X.shape)
-    
-    # plot decision boundary and margins
-    ax.contour(X, Y, P, colors='k',
-                levels=[-1, 0, 1], alpha=0.5,
-                linestyles=['--', '-', '--'])
-    
-    # plot support vectors
-    if plot_support:
-        ax.scatter(model.support_vectors_[:, 0],
-                    model.support_vectors_[:, 1],
-                    s=300, linewidth=1, facecolors='none');
-    ax.set_xlim(xlim)
-    ax.set_ylim(ylim)
-    
-plt.scatter(X_all[:, 0], X_all[:, 1], c=y_all, s=50, cmap='autumn')
-plot_svc_decision_function(model)
-
-# classifier_svc = SVC(random_state=54, kernel='rbf')
+# classifier_svc = SVC(random_state=564, kernel='rbf')
 # train_predict(classifier_svc, X_train, y_train, X_test, y_test)
+
+    
+#----------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------
+#SVC
+#----------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------
+    
+# from sklearn.svm import SVC
+
+# model = SVC(gamma='scale', decision_function_shape='ovo')
+# model.fit(X_train, y_train)
+
+# y_pred = model.predict(X_test)
+
+
+
+# def plot_svc_decision_function(model, ax=None, plot_support=True):
+#     """Plot the decision function for a 2D SVC"""
+#     if ax is None:
+#         ax = plt.gca()
+#     xlim = ax.get_xlim()
+#     ylim = ax.get_ylim()
+    
+#     # create grid to evaluate model
+#     x = np.linspace(xlim[0], xlim[1], 30)
+#     y = np.linspace(ylim[0], ylim[1], 30)
+#     Y, X = np.meshgrid(y, x)
+#     xy = np.vstack([X.ravel(), Y.ravel()]).T
+#     P = model.decision_function(xy).reshape(X.shape)
+    
+#     # plot decision boundary and margins
+#     ax.contour(X, Y, P, colors='k',
+#                 levels=[-1, 0, 1], alpha=0.5,
+#                 linestyles=['--', '-', '--'])
+    
+#     # plot support vectors
+#     if plot_support:
+#         ax.scatter(model.support_vectors_[:, 0],
+#                     model.support_vectors_[:, 1],
+#                     s=300, linewidth=1, facecolors='none');
+#     ax.set_xlim(xlim)
+#     ax.set_ylim(ylim)
+
+# output = pd.DataFrame(data=np.c_[y_test, y_pred])
+# print(output)
+# print('accuracy score: %.2f' % accuracy_score(y_test, y_pred))
+
+# def plot_confusion_matrix(cm, names, title='Confusion matrix', cmap=plt.cm.Blues):
+#     plt.imshow(cm, interpolation='nearest', cmap=cmap)
+#     plt.title(title)
+#     plt.colorbar(fraction=0.05)
+#     tick_marks = np.arange(len(names))
+#     plt.xticks(tick_marks, names, rotation=45)
+#     plt.yticks(tick_marks, names)
+#     plt.tight_layout()
+#     plt.ylabel('True label')
+#     plt.xlabel('Predicted label')
+    
+# cm = confusion_matrix(y_test, y_pred)
+# np.set_printoptions(precision=2)
+# cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+# print('Normalized confusion matrix')
+# print(cm_normalized)
+
+# #confusion matrix as a figure
+# plt.figure()
+# plot_confusion_matrix(cm_normalized, [-1, 0, 1], title='Normalized confusion matrix')
+# plt.show()
+
+# # plt.scatter(X_all, y_all)
+# # plot_svc_decision_function(model)
+
+# # classifier_svc = SVC(random_state=54, kernel='rbf')
+# # train_predict(classifier_svc, X_train, y_train, X_test, y_test)
+
+# #----------------------------------------------------------------------------------------------
+# #----------------------------------------------------------------------------------------------
+# #PCA
+# #----------------------------------------------------------------------------------------------
+# #----------------------------------------------------------------------------------------------
+
+from sklearn.decomposition import PCA
+
+pca = PCA(n_components=2)
+pca.fit(df)
+
+projected = pca.fit_transform(df)
+
+print(projected.shape)
+
+#now plot this PCA projection
+plt.scatter(projected[:, 0], projected[:, 1],
+            c=y_test, edgecolor='none', alpha=0.5,
+            cmap=plt.cm.get_cmap('rainbow', 3))
+plt.xlabel('component 1')
+plt.ylabel('component 2')
+plt.colorbar()
+plt.show
+
+
