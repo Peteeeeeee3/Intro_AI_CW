@@ -16,12 +16,15 @@ from sklearn.svm import SVC
 #displayd data
 from IPython.display import display
 
-data = pd.read_excel("merge_maestro.xlsx")
+#data = pd.read_excel("merge_maestro.xlsx")
+data = pd.read_excel('merging_test.xlsx')
 data = data.drop(columns=['Unnamed: 0'])
-data_for_matrix = data.drop(columns=['winner'])
+#data_for_matrix = data.drop(columns=['winner'])
 print(data)
-pd.plotting.scatter_matrix(data_for_matrix, alpha=0.2, figsize=(10, 10))
+pd.plotting.scatter_matrix(data, alpha=0.2, figsize=(10, 10))
 data = data.drop(data.index[300 : 19385])
+
+print(data)
 
 # Preview data.
 #display(data.head())
@@ -48,14 +51,16 @@ from pandas.plotting import scatter_matrix
 
 # Separate into feature set and target variable
 #FTR = Full Time Result (H=Home Win, D=Draw, A=Away Win)
-X_all = data.drop(columns=['winner'])
-y_all = data['winner']
+X_all = data.drop(columns=['home_score', 'away_score'])
+y_hs_all = data['home_score']
+y_as_all = data['away_score']
 
 # Standardising the data.
 from sklearn.preprocessing import scale
 
 #Center to the mean and component wise scale to unit variance.
-cols = [['off','def','spi', 'home_score', 'away_score']]
+#, 'home_score', 'away_score'
+cols = [['home_off','home_def','home_spi', 'away_off', 'away_def', 'away_spi']]
 for col in cols:
     X_all[col] = scale(X_all[col])
 
@@ -86,11 +91,10 @@ display(X_all.head())
 
 from sklearn.model_selection import train_test_split
 
-# Shuffle and split the dataset into training and testing set.
-X_train, X_test, y_train, y_test = train_test_split(X_all, y_all, 
-                                                    test_size = 0.5,
-                                                    random_state = 2,
-                                                    stratify = y_all)
+# Shuffle and split the dataset into training and testing set. (home score)
+X_train, X_test, y_train, y_test = train_test_split(X_all, y_hs_all, 
+                                                    test_size = 0.2,
+                                                    random_state = 15)
 
 #for measuring training time
 from time import time 
@@ -180,12 +184,21 @@ def plot_confusion_matrix(cm, names, title='Confusion matrix', cmap=plt.cm.Blues
     plt.ylabel('True label')
     plt.xlabel('Predicted label')
 
+#-----------------------------------------------------------------------------------------------------------------------
+#   away sore
+#-----------------------------------------------------------------------------------------------------------------------
+
+X_train, X_test, y_train, y_test = train_test_split(X_all, y_as_all, 
+                                                    test_size = 100,
+                                                    random_state = 15)
+
+
 #logistic regression
 y_pred_lg = train_predict(lg, X_train, y_train, X_test, y_test)
 print('')
 print('LG')
-#print(pd.DataFrame(data=np.c_[y_test, y_pred_lg]))
-#print('')
+print(pd.DataFrame(data=np.c_[y_test, y_pred_lg]))
+print('')
 #confusion matrix
 cm = confusion_matrix(y_test, y_pred_lg)
 np.set_printoptions(precision=2)
@@ -194,7 +207,7 @@ print('Normalized confusion matrix')
 print(cm_normalized)
 
 plt.figure()
-plot_confusion_matrix(cm_normalized, [-1, 0, 1], title='Normalized confusion matrix')
+plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5], title='Normalized confusion matrix')
 plt.show()
 print('')
 
@@ -202,8 +215,8 @@ print('')
 y_pred_svc = train_predict(svc, X_train, y_train, X_test, y_test)
 print('')
 print('SVC')
-#print(pd.DataFrame(data=np.c_[y_test, y_pred_svc]))
-#print ('')
+print(pd.DataFrame(data=np.c_[y_test, y_pred_svc]))
+print ('')
 #confusion matrix
 cm = confusion_matrix(y_test, y_pred_svc)
 np.set_printoptions(precision=2)
@@ -212,7 +225,7 @@ print('Normalized confusion matrix')
 print(cm_normalized)
 
 plt.figure()
-plot_confusion_matrix(cm_normalized, [-1, 0, 1], title='Normalized confusion matrix')
+plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5], title='Normalized confusion matrix')
 plt.show()
 print('')
 
@@ -220,8 +233,8 @@ print('')
 y_pred_dtc = train_predict(dtc, X_train, y_train, X_test, y_test)
 print('')
 print('DTC')
-#print(pd.DataFrame(data=np.c_[y_test, y_pred_dtc]))
-#print ('')
+print(pd.DataFrame(data=np.c_[y_test, y_pred_dtc]))
+print ('')
 #confusion matrix
 cm = confusion_matrix(y_test, y_pred_dtc)
 np.set_printoptions(precision=2)
@@ -230,7 +243,7 @@ print('Normalized confusion matrix')
 print(cm_normalized)
 
 plt.figure()
-plot_confusion_matrix(cm_normalized, [-1, 0, 1], title='Normalized confusion matrix')
+plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5], title='Normalized confusion matrix')
 plt.show()
 print('')
 
@@ -238,8 +251,8 @@ print('')
 y_pred_km = train_predict(kmeans, X_train, y_train, X_test, y_test)
 print('')
 print('KMEANS')
-#print(pd.DataFrame(data=np.c_[y_test, y_pred_km]))
-#print('')
+print(pd.DataFrame(data=np.c_[y_test, y_pred_km]))
+print('')
 #confusion matrix
 cm = confusion_matrix(y_test, y_pred_km)
 np.set_printoptions(precision=2)
@@ -248,7 +261,83 @@ print('Normalized confusion matrix')
 print(cm_normalized)
 
 plt.figure()
-plot_confusion_matrix(cm_normalized, [-1, 0, 1], title='Normalized confusion matrix')
+plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5], title='Normalized confusion matrix')
+plt.show()
+print('')
+
+#-----------------------------------------------------------------------------------------------------------------------
+#   away sore
+#-----------------------------------------------------------------------------------------------------------------------
+
+#logistic regression
+y_pred_lg = train_predict(lg, X_train, y_train, X_test, y_test)
+print('')
+print('LG')
+print(pd.DataFrame(data=np.c_[y_test, y_pred_lg]))
+print('')
+#confusion matrix
+cm = confusion_matrix(y_test, y_pred_lg)
+np.set_printoptions(precision=2)
+cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+print('Normalized confusion matrix')
+print(cm_normalized)
+
+plt.figure()
+plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5], title='Normalized confusion matrix')
+plt.show()
+print('')
+
+#SVC
+y_pred_svc = train_predict(svc, X_train, y_train, X_test, y_test)
+print('')
+print('SVC')
+print(pd.DataFrame(data=np.c_[y_test, y_pred_svc]))
+print ('')
+#confusion matrix
+cm = confusion_matrix(y_test, y_pred_svc)
+np.set_printoptions(precision=2)
+cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+print('Normalized confusion matrix')
+print(cm_normalized)
+
+plt.figure()
+plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5], title='Normalized confusion matrix')
+plt.show()
+print('')
+
+#dtc
+y_pred_dtc = train_predict(dtc, X_train, y_train, X_test, y_test)
+print('')
+print('DTC')
+print(pd.DataFrame(data=np.c_[y_test, y_pred_dtc]))
+print ('')
+#confusion matrix
+cm = confusion_matrix(y_test, y_pred_dtc)
+np.set_printoptions(precision=2)
+cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+print('Normalized confusion matrix')
+print(cm_normalized)
+
+plt.figure()
+plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5], title='Normalized confusion matrix')
+plt.show()
+print('')
+
+#k-means
+y_pred_km = train_predict(kmeans, X_train, y_train, X_test, y_test)
+print('')
+print('KMEANS')
+print(pd.DataFrame(data=np.c_[y_test, y_pred_km]))
+print('')
+#confusion matrix
+cm = confusion_matrix(y_test, y_pred_km)
+np.set_printoptions(precision=2)
+cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+print('Normalized confusion matrix')
+print(cm_normalized)
+
+plt.figure()
+plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5], title='Normalized confusion matrix')
 plt.show()
 print('')
 
