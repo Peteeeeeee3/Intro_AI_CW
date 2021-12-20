@@ -1,0 +1,17 @@
+match,home_team,away_team,home_off,home_def,home_spi,away_off,away_def,away_spi,home_rank,away_rank
+1,Tonga,Cook Islands,0.2,6.08,0.26,0.2,4.72,0.85,219,213
+2,Solomon Islands,Tahiti,0.69,1.71,22.71,0.81,2.15,19.56,153,160
+3,Solomon Islands,Vanuatu,0.69,1.71,22.71,0.64,2.17,15.99,153,170
+4,Solomon Islands,QMW,0.69,1.71,22.71,0,0,0,153,0
+5,Tahiti,Vanuatu,0.81,2.15,19.56,0.64,2.17,15.99,160,170
+6,Tahiti,QMW,0.81,2.15,19.56,0,0,0,160,0
+7,Vanuatu,QMW,0.64,2.17,15.99,0,0,0,170,0
+8,New Zealand,New Caledonia,1.31,1.21,47.47,0.69,1.85,20.92,85,157
+9,New Zealand,Fiji,1.31,1.21,47.47,0.67,1.45,26.35,85,145
+10,New Zealand,Papua New Guinea,1.31,1.21,47.47,0.6,2.88,9.16,85,186
+11,New Caledonia,Fiji,0.69,1.85,20.92,0.67,1.45,26.35,157,145
+12,New Caledonia,Papua New Guinea,0.69,1.85,20.92,0.6,2.88,9.16,157,186
+13,Fiji,Papua New Guinea,0.67,1.45,26.35,0.6,2.88,9.16,145,186
+14,GA1,GB2,0,0,0,0,0,0,0,0
+15,GA2,GB1,0,0,0,0,0,0,0,0
+16,14W,15W,0,0,0,0,0,0,0,0

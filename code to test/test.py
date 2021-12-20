@@ -60,7 +60,7 @@ from sklearn.preprocessing import scale
 
 #Center to the mean and component wise scale to unit variance.
 #, 'home_score', 'away_score'
-cols = [['home_off','home_def','home_spi', 'away_off', 'away_def', 'away_spi']]
+cols = [['home_off','home_def','home_spi', 'away_off', 'away_def', 'away_spi', 'home_rank', 'away_rank']]
 for col in cols:
     X_all[col] = scale(X_all[col])
 
@@ -185,10 +185,10 @@ def plot_confusion_matrix(cm, names, title='Confusion matrix', cmap=plt.cm.Blues
     plt.xlabel('Predicted label')
 
 #-----------------------------------------------------------------------------------------------------------------------
-#   away sore
+#   home sore
 #-----------------------------------------------------------------------------------------------------------------------
 
-X_train, X_test, y_train, y_test = train_test_split(X_all, y_as_all, 
+X_train, X_test, y_train, y_test = train_test_split(X_all, y_hs_all, 
                                                     test_size = 100,
                                                     random_state = 15)
 
@@ -269,6 +269,10 @@ print('')
 #   away sore
 #-----------------------------------------------------------------------------------------------------------------------
 
+X_train, X_test, y_train, y_test = train_test_split(X_all, y_as_all, 
+                                                    test_size = 100,
+                                                    random_state = 15)
+
 #logistic regression
 y_pred_lg = train_predict(lg, X_train, y_train, X_test, y_test)
 print('')
@@ -341,37 +345,57 @@ plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5], title='Normalized confusion 
 plt.show()
 print('')
 
+
+#-----------------------------------------------------------------------------------------------------------------------
 #UEFA PREDICTIONS
+#-----------------------------------------------------------------------------------------------------------------------
 
-
-data_spi = pd.read_csv("spi_global_rankings_intl.csv")
+#data_spi = pd.read_csv("spi_global_rankings_intl.csv")
 uefa_matches = pd.read_csv("UEFA_matches.csv")
 
-branch_1 = uefa_matches.drop([3, 4, 5, 6, 7, 8])
+branch_1 = uefa_matches.drop([3, 5, 8])
 print(branch_1)
 print('')
 
-branch_1 = branch_1.merge(data_spi, left_on='home_team', right_on='name')
-print(branch_1)
+OFC_matches = pd.read_csv("OFC_matches.csv")
+OFC_matches = OFC_matches.drop([3,5,6,13,14,15])
+print(OFC_matches)
 
-branch_1 = branch_1.merge(data_spi, left_on='away_team', right_on='name')
-print(branch_1)
 
-branch_1 = branch_1.drop(columns=['confed_x', 'confed_y'])
+CONMEBOL_matches = pd.read_csv("CONMEBOL_matches.csv")
+print(CONMEBOL_matches)
 
-cols = [['off_x','def_x','spi_x', 'off_y', 'def_y', 'spi_y']]
+CONCACAF_matches = pd.read_csv("CONCACAF_matches.csv")
+print(CONCACAF_matches)
+
+AFC_matches = pd.read_csv("AFC_matches.csv")
+AFC_matches.drop([24])
+print(AFC_matches)
+
+matches = pd.concat([branch_1, OFC_matches, CONMEBOL_matches, CONCACAF_matches, AFC_matches])
+print(matches)
+
+# branch_1 = branch_1.merge(data_spi, left_on='home_team', right_on='name')
+# print(branch_1)
+
+# branch_1 = branch_1.merge(data_spi, left_on='away_team', right_on='name')
+# print(branch_1)
+
+# branch_1 = branch_1.drop(columns=['confed_x', 'confed_y'])
+
+cols = [['home_off','home_def','home_spi', 'away_off', 'away_def', 'away_spi']]
 for col in cols:
-    branch_1[col] = scale(branch_1[col])
+    matches[col] = scale(matches[col])
 
 print('')
 print("dtc")
-X_pred = preprocess_features(branch_1)
-#match_pred_dtc = predict_match(dtc, X_pred)
-#print(match_pred_dtc)
+X_pred = preprocess_features(matches)
+match_pred_dtc = predict_match(dtc, X_pred)
+print(match_pred_dtc)
 print('')
 print("svc")
-#match_pred_svc = predict_match(svc, X_pred)
-#print(match_pred_svc)
+match_pred_svc = predict_match(svc, X_pred)
+print(match_pred_svc)
 print('')
 print("lg")
 match_pred_lg = predict_match(lg, X_pred)
