@@ -1,5 +1,5 @@
-#!/bin/bash
-#SBATCH -D /adbb135/code to test		     # Working directory
+#!/u3.bath/s32/adbb135
+#SBATCH -D /users/adbb135/code_to_test		 # Working directory
 #SBATCH --job-name=my_fluent                 # Job name
 #SBATCH --mail-type=END,FAIL                 # Mail events (NONE, BEGIN, END, FAIL, ALL)
 #SBATCH --mail-user=Xavier.Murrow@city.ac.uk # Where to send mail	
