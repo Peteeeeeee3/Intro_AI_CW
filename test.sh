@@ -1,8 +1,8 @@
-#!/u3.bath/s32/adbb135
+#!/bin/bash
 #SBATCH -D /users/adbb135/code_to_test		 # Working directory
 #SBATCH --job-name=my_fluent                 # Job name
 #SBATCH --mail-type=END,FAIL                 # Mail events (NONE, BEGIN, END, FAIL, ALL)
-#SBATCH --mail-user=Xavier.Murrow@city.ac.uk # Where to send mail	
+#SBATCH --mail-user=Xavier.Murrow@city.ac.uk # Where to send mail
 #SBATCH --exclusive                          # Exclusive use of nodes
 #SBATCH --nodes=2                            # Run on 2 nodes (each node has 48 cores)
 #SBATCH --ntasks-per-node=8                  # Use all the cores on each node
