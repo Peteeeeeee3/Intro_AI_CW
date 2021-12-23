@@ -23,7 +23,7 @@ import matplotlib.pyplot as plt
 data = pd.read_excel('merging_test.xlsx')
 data = data.drop(columns=['Unnamed: 0'])
 #data_for_matrix = data.drop(columns=['winner'])
-print(data)
+#print(data)
 pd.plotting.scatter_matrix(data, alpha=0.2, figsize=(10, 10))
 #data = data.drop(data.index[300 : 19385])
 
@@ -126,10 +126,10 @@ def plot_confusion_matrix(cm, names, title='Confusion matrix', cmap=plt.cm.Blues
 #-----------------------------------------------------------------------------------------------------------------------
 
 h_X_train, h_X_test, h_y_train, h_y_test = train_test_split(X_all, y_hs_all, 
-                                                            test_size = 100,
-                                                            random_state = 15)
-
-
+                                                                test_size = 100,
+                                                                random_state = 15)
+    
+    
 #logistic regression
 y_pred_lg = train_predict(h_lg, h_X_train, h_y_train, h_X_test, h_y_test)
 print('')
@@ -140,14 +140,14 @@ print('')
 cm = confusion_matrix(h_y_test, y_pred_lg)
 np.set_printoptions(precision=2)
 cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
-print('Normalized confusion matrix')
+print('Normalized confusion matrix (Logistic Regression)')
 print(cm_normalized)
-
+    
 plt.figure()
 plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5,6,7,8,9,10], title='Normalized confusion matrix')
 plt.show()
 print('')
-
+    
 # #SVC
 y_pred_svc = train_predict(h_svc, h_X_train, h_y_train, h_X_test, h_y_test)
 print('')
@@ -158,14 +158,14 @@ print ('')
 cm = confusion_matrix(h_y_test, y_pred_svc)
 np.set_printoptions(precision=2)
 cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
-print('Normalized confusion matrix')
+print('Normalized confusion matrix (Support Vector Machine)')
 print(cm_normalized)
-
+    
 plt.figure()
 plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5,6,7,8,9,10], title='Normalized confusion matrix')
 plt.show()
 print('')
-
+    
 #dtc
 y_pred_dtc = train_predict(h_dtc, h_X_train, h_y_train, h_X_test, h_y_test)
 print('')
@@ -176,14 +176,14 @@ print ('')
 cm = confusion_matrix(h_y_test, y_pred_dtc)
 np.set_printoptions(precision=2)
 cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
-print('Normalized confusion matrix')
+print('Normalized confusion matrix (Decision Tree Classifier)')
 print(cm_normalized)
-
+    
 plt.figure()
 plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5,6,7,8,9,10], title='Normalized confusion matrix')
 plt.show()
 print('')
-
+    
 #k-means
 y_pred_km = train_predict(h_kmeans, h_X_train, h_y_train, h_X_test, h_y_test)
 print('')
@@ -194,22 +194,22 @@ print('')
 cm = confusion_matrix(h_y_test, y_pred_km)
 np.set_printoptions(precision=2)
 cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
-print('Normalized confusion matrix')
+print('Normalized confusion matrix (K-Means)')
 print(cm_normalized)
-
+    
 plt.figure()
 plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5,6,7,8,9,10], title='Normalized confusion matrix')
 plt.show()
 print('')
-
+    
 #-----------------------------------------------------------------------------------------------------------------------
 #   away score
 #-----------------------------------------------------------------------------------------------------------------------
 
 a_X_train, a_X_test, a_y_train, a_y_test = train_test_split(X_all, y_as_all, 
-                                                            test_size = 100,
-                                                            random_state = 15)
-
+                                                                test_size = 100,
+                                                                random_state = 15)
+    
 #logistic regression
 y_pred_lg = train_predict(a_lg, a_X_train, a_y_train, a_X_test, a_y_test)
 print('')
@@ -220,14 +220,14 @@ print('')
 cm = confusion_matrix(a_y_test, y_pred_lg)
 np.set_printoptions(precision=2)
 cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
-print('Normalized confusion matrix')
+print('Normalized confusion matrix (Logistic Regression)')
 print(cm_normalized)
-
+    
 plt.figure()
 plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5,6,7,8,9,10], title='Normalized confusion matrix')
 plt.show()
 print('')
-
+    
 #SVC
 y_pred_svc = train_predict(a_svc, a_X_train, a_y_train, a_X_test, a_y_test)
 print('')
@@ -238,14 +238,14 @@ print ('')
 cm = confusion_matrix(a_y_test, y_pred_svc)
 np.set_printoptions(precision=2)
 cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
-print('Normalized confusion matrix')
+print('Normalized confusion matrix (Support Vector Machine)')
 print(cm_normalized)
 
 plt.figure()
 plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5,6,7,8,9,10], title='Normalized confusion matrix')
 plt.show()
 print('')
-
+    
 #dtc
 y_pred_dtc = train_predict(a_dtc, a_X_train, a_y_train, a_X_test, a_y_test)
 print('')
@@ -256,14 +256,14 @@ print ('')
 cm = confusion_matrix(a_y_test, y_pred_dtc)
 np.set_printoptions(precision=2)
 cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
-print('Normalized confusion matrix')
+print('Normalized confusion matrix (Decision Tree Classifier)')
 print(cm_normalized)
-
+    
 plt.figure()
 plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5,6,7,8,9,10], title='Normalized confusion matrix')
 plt.show()
 print('')
-
+    
 #k-means
 y_pred_km = train_predict(a_kmeans, a_X_train, a_y_train, a_X_test, a_y_test)
 print('')
@@ -274,29 +274,22 @@ print('')
 cm = confusion_matrix(a_y_test, y_pred_km)
 np.set_printoptions(precision=2)
 cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
-print('Normalized confusion matrix')
+print('Normalized confusion matrix (K-Means)')
 print(cm_normalized)
-
-plt.figure()
-plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5,6,7,8,9,10], title='Normalized confusion matrix')
-plt.show()
-print('')
-
 
 #-----------------------------------------------------------------------------------------------------------------------
 #UEFA PREDICTIONS
 #-----------------------------------------------------------------------------------------------------------------------
 
 def predict_uefa(home_clf, away_clf, name):
+    winners = []
     #data_spi = pd.read_csv("spi_global_rankings_intl.csv")
     uefa_matches = pd.read_csv("UEFA_matches.csv")
     
     branch_1 = uefa_matches.drop([2, 3, 4, 5, 6, 7, 8])
     branch_2 = uefa_matches.drop([0, 1, 2, 5, 6, 7, 8])
     branch_3 = uefa_matches.drop([0, 1, 2, 3, 4, 5, 8])
-    #print(branch_1)
-    #print(branch_2)
-    #print(branch_3)
+    
     branch_1 = branch_1.select_dtypes(include=['int', 'float'])
     branch_1 = branch_1.drop(columns=['match', 'home_score', 'away_score'])
     branch_2 = branch_2.select_dtypes(include=['int', 'float'])
@@ -413,10 +406,318 @@ def predict_uefa(home_clf, away_clf, name):
     
     if (finals_score > finals_score[1]).any():
         print('{} has qualified!'.format(home_team[0]))
+        winners.append(home_team[0])
     else:
         print('{} has qualified!'.format(away_team[0]))
+        winners.append(away_team[0])
+    print('')
+        
+    #finals 2
+    final_2 = pd.DataFrame()
+    final_2 = uefa_matches.drop([0,1,2,4,5,6,7,8])
+    
+    home_team = uefa_matches['home_team']
+    away_team = uefa_matches['away_team']
+    print('')
+    print('{} {} : {} {}'.format(home_team[3], scores[1][0][0], scores[1][0][1], away_team[3]))
+    print('')
+    print('{} {} : {} {}'.format(home_team[4], scores[1][1][0], scores[1][1][1], away_team[4]))
+    print('')
+    
+    if (scores[1][0] > scores[1][0][1]).any():
+        final_2['away_team'] = final_2['away_team'].replace(['Poland'], ' ')
+        final_2['away_off'] = final_2['away_off'].replace(['2.06'], '0')
+        final_2['away_def'] = final_2['away_def'].replace(['0.81'], '0')
+        final_2['away_spi'] = final_2['away_spi'].replace(['72'], '0')
+        final_2['away_rank'] = final_2['away_rank'].replace(['28'], '0')
+    else:
+        final_2['home_team'] = final_2['home_team'].replace(['Russia'], 'Poland')
+        final_2['home_off'] = final_2['home_off'].replace(['1.87'], '2.06')
+        final_2['home_def'] = final_2['home_def'].replace(['0.9'], '0.81')
+        final_2['home_spi'] = final_2['home_spi'].replace(['66.62'], '72')
+        final_2['home_rank'] = final_2['home_rank'].replace(['41'], '28')
+        final_2['away_team'] = final_2['away_team'].replace(['Poland'], ' ')
+        final_2['away_off'] = final_2['away_off'].replace(['2.06'], '0')
+        final_2['away_def'] = final_2['away_def'].replace(['0.81'], '0')
+        final_2['away_spi'] = final_2['away_spi'].replace(['72'], '0')
+        final_2['away_rank'] = final_2['away_rank'].replace(['28'], '0')
+        
+    if (scores[1][1] > scores[1][1][1]).any():
+        final_2['away_team'] = final_2['away_team'].replace([' '], 'Sweden')
+        final_2['away_off'] = final_2['away_off'].replace(['0'], '2.23')
+        final_2['away_def'] = final_2['away_def'].replace(['0'], '0.78')
+        final_2['away_spi'] = final_2['away_spi'].replace(['0'], '75.38')
+        final_2['away_rank'] = final_2['away_rank'].replace(['0'], '24')
+    else:
+        final_2['away_team'] = final_2['away_team'].replace([' '], 'Czech Republic')
+        final_2['away_off'] = final_2['away_off'].replace(['0'], '2.27')
+        final_2['away_def'] = final_2['away_def'].replace(['0'], '0.68')
+        final_2['away_spi'] = final_2['away_spi'].replace(['0'], '78.03')
+        final_2['away_rank'] = final_2['away_rank'].replace(['0'], '19')
+        
+    
+    final_2_sin = final_2.select_dtypes(include=['int', 'float'])
+    final_2_sin = final_2_sin.drop(columns=['match', 'home_score', 'away_score'])
+    
+    finals_score = []
+    finals_score.append(predict_match(home_clf, final_2_sin))
+    finals_score.append(predict_match(away_clf, final_2_sin))
+    
+    home_team = final_2['home_team']
+    away_team = final_2['away_team']
+    
+    print('')
+    print('{} {} : {} {}'.format(home_team[3], finals_score[0][0], finals_score[1][0], away_team[3]))
+    print('')
+    
+    if (finals_score > finals_score[1]).any():
+        print('{} has qualified!'.format(home_team[3]))
+        winners.append(home_team[3])
+    else:
+        print('{} has qualified!'.format(away_team[3]))
+        winners.append(away_team[3])
+    print('')
+        
+    #finals 3
+    final_3 = pd.DataFrame()
+    final_3 = uefa_matches.drop([0,1,2,3,4,5,7,8])
+    
+    home_team = uefa_matches['home_team']
+    away_team = uefa_matches['away_team']
+    print('')
+    print('{} {} : {} {}'.format(home_team[6], scores[2][0][0], scores[2][0][1], away_team[6]))
+    print('')
+    print('{} {} : {} {}'.format(home_team[7], scores[2][1][0], scores[2][1][1], away_team[7]))
+    print('')
+    
+    
+    if (scores[2][0] > scores[2][0][1]).any():
+        final_3['away_team'] = final_3['away_team'].replace(['Turkey'], ' ')
+        final_3['away_off'] = final_3['away_off'].replace(['1.95'], '0')
+        final_3['away_def'] = final_3['away_def'].replace(['1.03'], '0')
+        final_3['away_spi'] = final_3['away_spi'].replace(['65'], '0')
+        final_3['away_rank'] = final_3['away_rank'].replace(['44'], '0')
+    else:
+        final_3['home_team'] = final_3['home_team'].replace(['Portugal'], 'Turkey')
+        final_3['home_off'] = final_3['home_off'].replace(['2.85'], '1.95')
+        final_3['home_def'] = final_3['home_def'].replace(['0.54'], '1.03')
+        final_3['home_spi'] = final_3['home_spi'].replace(['87.35'], '65')
+        final_3['home_rank'] = final_3['home_rank'].replace(['6'], '44')
+        final_3['away_team'] = final_3['away_team'].replace(['Turkey'], ' ')
+        final_3['away_off'] = final_3['away_off'].replace(['1.95'], '0')
+        final_3['away_def'] = final_3['away_def'].replace(['1.03'], '0')
+        final_3['away_spi'] = final_3['away_spi'].replace(['65'], '0')
+        final_3['away_rank'] = final_3['away_rank'].replace(['44'], '0')
+        
+        
+        
+    if (scores[2][1] > scores[2][1][1]).any():
+        final_3['away_team'] = final_3['away_team'].replace([' '], 'Italy')
+        final_3['away_off'] = final_3['away_off'].replace(['0'], '2.44')
+        final_3['away_def'] = final_3['away_def'].replace(['0'], '0.48')
+        final_3['away_spi'] = final_3['away_spi'].replace(['0'], '84.36')
+        final_3['away_rank'] = final_3['away_rank'].replace(['0'], '10')
+    else:
+        final_3['away_team'] = final_3['away_team'].replace([' '], 'North Macedonia')
+        final_3['away_off'] = final_3['away_off'].replace(['0'], '1.69')
+        final_3['away_def'] = final_3['away_def'].replace(['0'], '0.98')
+        final_3['away_spi'] = final_3['away_spi'].replace(['0'], '61.22')
+        final_3['away_rank'] = final_3['away_rank'].replace(['0'], '52')
+        
+    
+    final_3_sin = final_3.select_dtypes(include=['int', 'float'])
+    final_3_sin = final_3_sin.drop(columns=['match', 'home_score', 'away_score'])
+    
+    finals_score = []
+    finals_score.append(predict_match(home_clf, final_3_sin))
+    finals_score.append(predict_match(away_clf, final_3_sin))
+    
+    home_team = final_3['home_team']
+    away_team = final_3['away_team']
+    
+    print('')
+    print('{} {} : {} {}'.format(home_team[6], finals_score[0][0], finals_score[1][0], away_team[6]))
+    print('')
+    
+    if (finals_score > finals_score[1]).any():
+        print('{} has qualified!'.format(home_team[6]))
+        winners.append(home_team[6])
+    else:
+        print('{} has qualified!'.format(away_team[6]))
+        winners.append(away_team[6])
+    print('')
+    
+    return winners
 
-predict_uefa(h_dtc, a_dtc, "DTC")
-predict_uefa(h_lg, a_lg, "LG")
-predict_uefa(h_kmeans, a_kmeans, "KMEANS")
-predict_uefa(h_svc, a_svc, "SVC")
+qualified_teams = []
+lg_qt = []
+dtc_qt = []
+svc_qt = []
+km_qt = []
+for i in range(10):
+    #-----------------------------------------------------------------------------------------------------------------------
+    #   home score
+    #-----------------------------------------------------------------------------------------------------------------------
+    
+    h_X_train, h_X_test, h_y_train, h_y_test = train_test_split(X_all, y_hs_all, 
+                                                                test_size = 100,
+                                                                random_state = 15)
+    
+    #logistic regression
+    y_pred_lg = train_predict(h_lg, h_X_train, h_y_train, h_X_test, h_y_test)
+    print('')
+    print('LG')
+    print(pd.DataFrame(data=np.c_[h_y_test, y_pred_lg]))
+    print('')
+    
+    # #SVC
+    y_pred_svc = train_predict(h_svc, h_X_train, h_y_train, h_X_test, h_y_test)
+    print('')
+    print('SVC')
+    print(pd.DataFrame(data=np.c_[h_y_test, y_pred_svc]))
+    print ('')
+    
+    #dtc
+    y_pred_dtc = train_predict(h_dtc, h_X_train, h_y_train, h_X_test, h_y_test)
+    print('')
+    print('DTC')
+    print(pd.DataFrame(data=np.c_[h_y_test, y_pred_dtc]))
+    print ('')
+    
+    #k-means
+    y_pred_km = train_predict(h_kmeans, h_X_train, h_y_train, h_X_test, h_y_test)
+    print('')
+    print('KMEANS')
+    print(pd.DataFrame(data=np.c_[h_y_test, y_pred_km]))
+    print('')
+    
+    #-----------------------------------------------------------------------------------------------------------------------
+    #   away score
+    #-----------------------------------------------------------------------------------------------------------------------
+    
+    a_X_train, a_X_test, a_y_train, a_y_test = train_test_split(X_all, y_as_all, 
+                                                                test_size = 100,
+                                                                random_state = 15)
+    
+    #logistic regression
+    y_pred_lg = train_predict(a_lg, a_X_train, a_y_train, a_X_test, a_y_test)
+    print('')
+    print('LG')
+    print(pd.DataFrame(data=np.c_[a_y_test, y_pred_lg]))
+    print('')
+    
+    #SVC
+    y_pred_svc = train_predict(a_svc, a_X_train, a_y_train, a_X_test, a_y_test)
+    print('')
+    print('SVC')
+    print(pd.DataFrame(data=np.c_[a_y_test, y_pred_svc]))
+    print ('')
+    
+    #dtc
+    y_pred_dtc = train_predict(a_dtc, a_X_train, a_y_train, a_X_test, a_y_test)
+    print('')
+    print('DTC')
+    print(pd.DataFrame(data=np.c_[a_y_test, y_pred_dtc]))
+    print ('')
+    
+    #k-means
+    y_pred_km = train_predict(a_kmeans, a_X_train, a_y_train, a_X_test, a_y_test)
+    print('')
+    print('KMEANS')
+    print(pd.DataFrame(data=np.c_[a_y_test, y_pred_km]))
+    print('')
+    
+    dtc_results = predict_uefa(h_dtc, a_dtc, "DTC")
+    dtc_qt.append(dtc_results)
+    qualified_teams.append(dtc_results)
+    
+    lg_results = predict_uefa(h_lg, a_lg, "LG")
+    lg_qt.append(lg_results)
+    qualified_teams.append(lg_results)
+    
+    km_results = predict_uefa(h_kmeans, a_kmeans, "KMEANS")
+    km_qt.append(km_results)
+    qualified_teams.append(km_results)
+    
+    svc_results = predict_uefa(h_svc, a_svc, "SVC")
+    svc_qt.append(svc_results)
+    qualified_teams.append(svc_results)
+    
+    
+def count_winners(winners):
+    austria = 0 
+    czechia = 0
+    italy = 0
+    north_mcd = 0
+    poland = 0
+    portugal = 0
+    russia = 0
+    scotland = 0
+    sweden = 0
+    turkey = 0
+    ukraine = 0
+    wales = 0
+    for set in winners:
+        austria += set.count('Austria')
+        czechia += set.count('Czech Republic')
+        italy += set.count('Italy')
+        north_mcd += set.count('North Macedonia')
+        poland += set.count('Poland')
+        portugal += set.count('Portugal')
+        russia += set.count('Russia')
+        scotland += set.count('Scotland')
+        sweden += set.count('Sweden')
+        turkey += set.count('Turkey')
+        ukraine += set.count('Ukraine')
+        wales += set.count('Wales')
+        
+    return [austria, czechia, italy, north_mcd, poland, portugal, russia, scotland, sweden, turkey, ukraine, wales]
+    
+
+#graph how often teams win
+x_coords = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120]
+
+heights_total = count_winners(qualified_teams)
+heights_lg = count_winners(lg_qt)
+heights_dtc = count_winners(dtc_qt)
+heights_svc = count_winners(svc_qt)
+heights_km = count_winners(km_qt)
+
+
+labels = ['AUT', 'CZR', 'ITA', 'NMK', 'POL', 'POR', 'RUS', 
+          'SCO', 'SWE', 'TUR', 'UKR', 'WAL']
+
+#summary
+plt.bar(x_coords, heights_total, tick_label=labels, width=5, color=['blue'])
+plt.xlabel('Countries in UEFA World Cup 2022 Qualification Round 2')
+plt.ylabel('Number of predicted qualifications')
+plt.title('UEFA World Cup 2022 Qualification Round 2 Combined Prediction Results (Summary)')
+plt.show()
+
+#logistic regression
+plt.bar(x_coords, heights_lg, tick_label=labels, width=5, color=['blue'])
+plt.xlabel('Countries in UEFA World Cup 2022 Qualification Round 2')
+plt.ylabel('Number of predicted qualifications')
+plt.title('UEFA World Cup 2022 Qualification Round 2 Combined Prediction Results (Logistic Regression)')
+plt.show()
+
+#decision tree classifier
+plt.bar(x_coords, heights_dtc, tick_label=labels, width=5, color=['blue'])
+plt.xlabel('Countries in UEFA World Cup 2022 Qualification Round 2')
+plt.ylabel('Number of predicted qualifications')
+plt.title('UEFA World Cup 2022 Qualification Round 2 Combined Prediction Results (Decision Tree Classifier)')
+plt.show()
+
+#support vector machine
+plt.bar(x_coords, heights_svc, tick_label=labels, width=5, color=['blue'])
+plt.xlabel('Countries in UEFA World Cup 2022 Qualification Round 2')
+plt.ylabel('Number of predicted qualifications')
+plt.title('UEFA World Cup 2022 Qualification Round 2 Combined Prediction Results (Support Vector Machine)')
+plt.show()
+
+#k-means
+plt.bar(x_coords, heights_km, tick_label=labels, width=5, color=['blue'])
+plt.xlabel('Countries in UEFA World Cup 2022 Qualification Round 2')
+plt.ylabel('Number of predicted qualifications')
+plt.title('UEFA World Cup 2022 Qualification Round 2 Combined Prediction Results (K-Means)')
+plt.show()
