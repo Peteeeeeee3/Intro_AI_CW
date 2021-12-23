@@ -1,20 +1,23 @@
 import os
-#data preprocessing
 import pandas as pd
 import numpy as np
-#produces a prediction model in the form of an ensemble of weak prediction models, typically decision tree
-#import xgboost as xgb
-#the outcome (dependent variable) has only a limited number of possible values. 
-#Logistic Regression is used when response variable is categorical in nature.
 from sklearn.linear_model import LogisticRegression
-#A random forest is a meta estimator that fits a number of decision tree classifiers 
-#on various sub-samples of the dataset and use averaging to improve the predictive 
-#accuracy and control over-fitting.
 from sklearn.ensemble import RandomForestClassifier
-#a discriminative classifier formally defined by a separating hyperplane.
 from sklearn.svm import SVC
-#displayd data
 from IPython.display import display
+from sklearn.preprocessing import scale
+from pandas.plotting import scatter_matrix
+from sklearn.model_selection import train_test_split
+from time import time 
+from sklearn.metrics import f1_score
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.decomposition import PCA
+from sklearn.model_selection import KFold
+from sklearn.cluster import KMeans
+from sklearn.metrics import confusion_matrix
+import matplotlib.pyplot as plt
+
+
 
 #data = pd.read_excel("merge_maestro.xlsx")
 data = pd.read_excel('merging_test.xlsx')
@@ -22,82 +25,28 @@ data = data.drop(columns=['Unnamed: 0'])
 #data_for_matrix = data.drop(columns=['winner'])
 print(data)
 pd.plotting.scatter_matrix(data, alpha=0.2, figsize=(10, 10))
-data = data.drop(data.index[300 : 19385])
-
-print(data)
-
-# Preview data.
-#display(data.head())
+#data = data.drop(data.index[300 : 19385])
 
 # Visualising distribution of data
-from pandas.plotting import scatter_matrix
 
-#the scatter matrix is plotting each of the columns specified against each other column.
-#You would have observed that the diagonal graph is defined as a histogram, which means that in the 
-#section of the plot matrix where the variable is against itself, a histogram is plotted.
-
-#Scatter plots show how much one variable is affected by another. 
-#The relationship between two variables is called their correlation
-#negative vs positive correlation
-
-#HTGD - Home team goal difference
-#ATGD - away team goal difference
-#HTP - Home team points
-#ATP - Away team points
-#DiffFormPts Diff in points
-#DiffLP - Differnece in last years prediction
-
-#scatter_matrix(data[['rank','name','off','def','spi','home_score','away_score', 'winner']], figsize=(15,15))
-
-# Separate into feature set and target variable
-#FTR = Full Time Result (H=Home Win, D=Draw, A=Away Win)
 X_all = data.drop(columns=['home_score', 'away_score'])
 y_hs_all = data['home_score']
 y_as_all = data['away_score']
 
 # Standardising the data.
-from sklearn.preprocessing import scale
-
 #Center to the mean and component wise scale to unit variance.
 #, 'home_score', 'away_score'
 cols = [['home_off','home_def','home_spi', 'away_off', 'away_def', 'away_spi', 'home_rank', 'away_rank']]
 for col in cols:
     X_all[col] = scale(X_all[col])
-
-#we want continous vars that are integers for our input data, so lets remove any categorical vars
-def preprocess_features(X):
-    ''' Preprocesses the football data and converts catagorical variables into dummy variables. '''
     
-    # Initialize new output DataFrame
-    output = pd.DataFrame(index = X.index)
-
-    # Investigate each feature column for the data
-    for col, col_data in X.iteritems():
-
-        # If data type is categorical, convert to dummy variables
-        if col_data.dtype == object:
-            col_data = pd.get_dummies(col_data, prefix = col)
-                    
-        # Collect the revised columns
-        output = output.join(col_data)
-    
-    return output
-
-X_all = preprocess_features(X_all)
-print("Processed feature columns ({} total features):\n{}".format(len(X_all.columns), list(X_all.columns)))
-
-print("\nFeature values:")
-display(X_all.head())
-
-from sklearn.model_selection import train_test_split
+X_all = X_all.select_dtypes(include=['int', 'float'])
 
 # Shuffle and split the dataset into training and testing set. (home score)
 X_train, X_test, y_train, y_test = train_test_split(X_all, y_hs_all, 
                                                     test_size = 0.2,
                                                     random_state = 15)
 
-#for measuring training time
-from time import time 
 # F1 score (also F-score or F-measure) is a measure of a test's accuracy. 
 #It considers both the precision p and the recall r of the test to compute 
 #the score: p is the number of correct positive results divided by the number of 
@@ -105,17 +54,12 @@ from time import time
 #the number of positive results that should have been returned. The F1 score can be 
 #interpreted as a weighted average of the precision and recall, where an F1 score 
 #reaches its best value at 1 and worst at 0.
-from sklearn.metrics import f1_score
 
 def train_classifier(clf, X_train, y_train):
-    ''' Fits a classifier to the training data. '''
-    
-    # Start the clock, train the classifier, then stop the clock
     start = time()
     clf.fit(X_train, y_train)
     end = time()
     
-    # Print the results
     print("Trained model in {:.4f} seconds".format(end - start))
 
 def predict_match(clf, match):
@@ -153,24 +97,17 @@ def train_predict(clf, X_train, y_train, X_test, y_test):
     print("F1 score and accuracy score for test set: {:.4f} , {:.4f}.".format(f1 , acc))
     
     return y_pred
-    
-# Initialize the three models (XGBoost is initialized later)
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.decomposition import PCA
-from sklearn.model_selection import KFold
-from sklearn.cluster import KMeans
 
-lg = LogisticRegression(random_state = 42)
-svc = SVC(random_state = 912, kernel='rbf')
-dtc = DecisionTreeClassifier()
-kmeans = KMeans(n_clusters=2)
-
-#Boosting refers to this general problem of producing a very accurate prediction rule 
-#by combining rough and moderately inaccurate rules-of-thumb
-#clf_C = xgb.XGBClassifier(seed = 82)
-
-from sklearn.metrics import confusion_matrix
-import matplotlib.pyplot as plt
+#home 
+h_lg = LogisticRegression(random_state = 42)
+h_svc = SVC(random_state = 912, kernel='rbf')
+h_dtc = DecisionTreeClassifier()
+h_kmeans = KMeans(n_clusters=2)
+#away
+a_lg = LogisticRegression(random_state = 42)
+a_svc = SVC(random_state = 912, kernel='rbf')
+a_dtc = DecisionTreeClassifier()
+a_kmeans = KMeans(n_clusters=2)
 
 
 def plot_confusion_matrix(cm, names, title='Confusion matrix', cmap=plt.cm.Blues):
@@ -185,163 +122,163 @@ def plot_confusion_matrix(cm, names, title='Confusion matrix', cmap=plt.cm.Blues
     plt.xlabel('Predicted label')
 
 #-----------------------------------------------------------------------------------------------------------------------
-#   home sore
+#   home score
 #-----------------------------------------------------------------------------------------------------------------------
 
-X_train, X_test, y_train, y_test = train_test_split(X_all, y_hs_all, 
-                                                    test_size = 100,
-                                                    random_state = 15)
+h_X_train, h_X_test, h_y_train, h_y_test = train_test_split(X_all, y_hs_all, 
+                                                            test_size = 100,
+                                                            random_state = 15)
 
 
 #logistic regression
-y_pred_lg = train_predict(lg, X_train, y_train, X_test, y_test)
+y_pred_lg = train_predict(h_lg, h_X_train, h_y_train, h_X_test, h_y_test)
 print('')
 print('LG')
-print(pd.DataFrame(data=np.c_[y_test, y_pred_lg]))
+print(pd.DataFrame(data=np.c_[h_y_test, y_pred_lg]))
 print('')
 #confusion matrix
-cm = confusion_matrix(y_test, y_pred_lg)
+cm = confusion_matrix(h_y_test, y_pred_lg)
 np.set_printoptions(precision=2)
 cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
 print('Normalized confusion matrix')
 print(cm_normalized)
 
 plt.figure()
-plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5], title='Normalized confusion matrix')
+plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5,6,7,8,9,10], title='Normalized confusion matrix')
 plt.show()
 print('')
 
-#SVC
-y_pred_svc = train_predict(svc, X_train, y_train, X_test, y_test)
+# #SVC
+y_pred_svc = train_predict(h_svc, h_X_train, h_y_train, h_X_test, h_y_test)
 print('')
 print('SVC')
-print(pd.DataFrame(data=np.c_[y_test, y_pred_svc]))
+print(pd.DataFrame(data=np.c_[h_y_test, y_pred_svc]))
 print ('')
 #confusion matrix
-cm = confusion_matrix(y_test, y_pred_svc)
+cm = confusion_matrix(h_y_test, y_pred_svc)
 np.set_printoptions(precision=2)
 cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
 print('Normalized confusion matrix')
 print(cm_normalized)
 
 plt.figure()
-plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5], title='Normalized confusion matrix')
+plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5,6,7,8,9,10], title='Normalized confusion matrix')
 plt.show()
 print('')
 
 #dtc
-y_pred_dtc = train_predict(dtc, X_train, y_train, X_test, y_test)
+y_pred_dtc = train_predict(h_dtc, h_X_train, h_y_train, h_X_test, h_y_test)
 print('')
 print('DTC')
-print(pd.DataFrame(data=np.c_[y_test, y_pred_dtc]))
+print(pd.DataFrame(data=np.c_[h_y_test, y_pred_dtc]))
 print ('')
 #confusion matrix
-cm = confusion_matrix(y_test, y_pred_dtc)
+cm = confusion_matrix(h_y_test, y_pred_dtc)
 np.set_printoptions(precision=2)
 cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
 print('Normalized confusion matrix')
 print(cm_normalized)
 
 plt.figure()
-plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5], title='Normalized confusion matrix')
+plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5,6,7,8,9,10], title='Normalized confusion matrix')
 plt.show()
 print('')
 
 #k-means
-y_pred_km = train_predict(kmeans, X_train, y_train, X_test, y_test)
+y_pred_km = train_predict(h_kmeans, h_X_train, h_y_train, h_X_test, h_y_test)
 print('')
 print('KMEANS')
-print(pd.DataFrame(data=np.c_[y_test, y_pred_km]))
+print(pd.DataFrame(data=np.c_[h_y_test, y_pred_km]))
 print('')
 #confusion matrix
-cm = confusion_matrix(y_test, y_pred_km)
+cm = confusion_matrix(h_y_test, y_pred_km)
 np.set_printoptions(precision=2)
 cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
 print('Normalized confusion matrix')
 print(cm_normalized)
 
 plt.figure()
-plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5], title='Normalized confusion matrix')
+plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5,6,7,8,9,10], title='Normalized confusion matrix')
 plt.show()
 print('')
 
 #-----------------------------------------------------------------------------------------------------------------------
-#   away sore
+#   away score
 #-----------------------------------------------------------------------------------------------------------------------
 
-X_train, X_test, y_train, y_test = train_test_split(X_all, y_as_all, 
-                                                    test_size = 100,
-                                                    random_state = 15)
+a_X_train, a_X_test, a_y_train, a_y_test = train_test_split(X_all, y_as_all, 
+                                                            test_size = 100,
+                                                            random_state = 15)
 
 #logistic regression
-y_pred_lg = train_predict(lg, X_train, y_train, X_test, y_test)
+y_pred_lg = train_predict(a_lg, a_X_train, a_y_train, a_X_test, a_y_test)
 print('')
 print('LG')
-print(pd.DataFrame(data=np.c_[y_test, y_pred_lg]))
+print(pd.DataFrame(data=np.c_[a_y_test, y_pred_lg]))
 print('')
 #confusion matrix
-cm = confusion_matrix(y_test, y_pred_lg)
+cm = confusion_matrix(a_y_test, y_pred_lg)
 np.set_printoptions(precision=2)
 cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
 print('Normalized confusion matrix')
 print(cm_normalized)
 
 plt.figure()
-plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5], title='Normalized confusion matrix')
+plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5,6,7,8,9,10], title='Normalized confusion matrix')
 plt.show()
 print('')
 
 #SVC
-y_pred_svc = train_predict(svc, X_train, y_train, X_test, y_test)
+y_pred_svc = train_predict(a_svc, a_X_train, a_y_train, a_X_test, a_y_test)
 print('')
 print('SVC')
-print(pd.DataFrame(data=np.c_[y_test, y_pred_svc]))
+print(pd.DataFrame(data=np.c_[a_y_test, y_pred_svc]))
 print ('')
 #confusion matrix
-cm = confusion_matrix(y_test, y_pred_svc)
+cm = confusion_matrix(a_y_test, y_pred_svc)
 np.set_printoptions(precision=2)
 cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
 print('Normalized confusion matrix')
 print(cm_normalized)
 
 plt.figure()
-plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5], title='Normalized confusion matrix')
+plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5,6,7,8,9,10], title='Normalized confusion matrix')
 plt.show()
 print('')
 
 #dtc
-y_pred_dtc = train_predict(dtc, X_train, y_train, X_test, y_test)
+y_pred_dtc = train_predict(a_dtc, a_X_train, a_y_train, a_X_test, a_y_test)
 print('')
 print('DTC')
-print(pd.DataFrame(data=np.c_[y_test, y_pred_dtc]))
+print(pd.DataFrame(data=np.c_[a_y_test, y_pred_dtc]))
 print ('')
 #confusion matrix
-cm = confusion_matrix(y_test, y_pred_dtc)
+cm = confusion_matrix(a_y_test, y_pred_dtc)
 np.set_printoptions(precision=2)
 cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
 print('Normalized confusion matrix')
 print(cm_normalized)
 
 plt.figure()
-plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5], title='Normalized confusion matrix')
+plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5,6,7,8,9,10], title='Normalized confusion matrix')
 plt.show()
 print('')
 
 #k-means
-y_pred_km = train_predict(kmeans, X_train, y_train, X_test, y_test)
+y_pred_km = train_predict(a_kmeans, a_X_train, a_y_train, a_X_test, a_y_test)
 print('')
 print('KMEANS')
-print(pd.DataFrame(data=np.c_[y_test, y_pred_km]))
+print(pd.DataFrame(data=np.c_[a_y_test, y_pred_km]))
 print('')
 #confusion matrix
-cm = confusion_matrix(y_test, y_pred_km)
+cm = confusion_matrix(a_y_test, y_pred_km)
 np.set_printoptions(precision=2)
 cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
 print('Normalized confusion matrix')
 print(cm_normalized)
 
 plt.figure()
-plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5], title='Normalized confusion matrix')
+plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5,6,7,8,9,10], title='Normalized confusion matrix')
 plt.show()
 print('')
 
@@ -350,77 +287,136 @@ print('')
 #UEFA PREDICTIONS
 #-----------------------------------------------------------------------------------------------------------------------
 
-#data_spi = pd.read_csv("spi_global_rankings_intl.csv")
-uefa_matches = pd.read_csv("UEFA_matches.csv")
+def predict_uefa(home_clf, away_clf, name):
+    #data_spi = pd.read_csv("spi_global_rankings_intl.csv")
+    uefa_matches = pd.read_csv("UEFA_matches.csv")
+    
+    branch_1 = uefa_matches.drop([2, 3, 4, 5, 6, 7, 8])
+    branch_2 = uefa_matches.drop([0, 1, 2, 5, 6, 7, 8])
+    branch_3 = uefa_matches.drop([0, 1, 2, 3, 4, 5, 8])
+    #print(branch_1)
+    #print(branch_2)
+    #print(branch_3)
+    branch_1 = branch_1.select_dtypes(include=['int', 'float'])
+    branch_1 = branch_1.drop(columns=['match', 'home_score', 'away_score'])
+    branch_2 = branch_2.select_dtypes(include=['int', 'float'])
+    branch_2 = branch_2.drop(columns=['match', 'home_score', 'away_score'])
+    branch_3 = branch_3.select_dtypes(include=['int', 'float'])
+    branch_3 = branch_3.drop(columns=['match', 'home_score', 'away_score'])
+    print('')
+    
+    branches = [branch_1, branch_1, branch_3]
+    
+    # OFC_matches = pd.read_csv("OFC_matches.csv")
+    # OFC_matches = OFC_matches.drop([3,5,6,13,14,15])
+    
+    # CONMEBOL_matches = pd.read_csv("CONMEBOL_matches.csv")
+    
+    # CONCACAF_matches = pd.read_csv("CONCACAF_matches.csv")
+    
+    # AFC_matches = pd.read_csv("AFC_matches.csv")
+    
+    # matches = pd.concat([branch_1, OFC_matches, CONMEBOL_matches, CONCACAF_matches, AFC_matches])
+    # print(matches)
+    # matches.to_excel('matches_merging_test.xlsx', sheet_name='teams, spi & scores')
+    
+    # branch_1 = branch_1.merge(data_spi, left_on='home_team', right_on='name')
+    # print(branch_1)
+    
+    # branch_1 = branch_1.merge(data_spi, left_on='away_team', right_on='name')
+    # print(branch_1)
+    
+    # branch_1 = branch_1.drop(columns=['confed_x', 'confed_y'])
+    
+    cols = [['home_off','home_def','home_spi', 'away_off', 'away_def', 'away_spi']]
+    for col in cols:
+        branch_1[col] = scale(branch_1[col])
+        branch_2[col] = scale(branch_2[col])
+        branch_3[col] = scale(branch_3[col])
+    
+    
+    print('')
+    print(name)
+    
+    #branch 1
+    home_scores = []
+    away_scores = []
+    for branch in branches:
+        #home score
+        home_scores.append(predict_match(home_clf, branch_1))
+        #away score
+        away_scores.append(predict_match(away_clf, branch_1))
+    
+    scores = []
+    for i in range(len(home_scores)):
+        scores.append([home_scores[i], away_scores[i]])
+        
+    #finals 1
+    final_1 = pd.DataFrame()
+    final_1 = uefa_matches.drop([1,2,3,4,5,6,7,8])
+    
+    home_team = uefa_matches['home_team']
+    away_team = uefa_matches['away_team']
+    print('')
+    print('{} {} : {} {}'.format(home_team[0], scores[0][0][0], scores[0][0][1], away_team[0]))
+    print('')
+    print('{} {} : {} {}'.format(home_team[1], scores[0][1][0], scores[0][1][1], away_team[1]))
+    print('')
+    
+    
+    if (scores[0][0] > scores[0][0][1]).any():
+        final_1['away_team'] = final_1['away_team'].replace(['Austria'], ' ')
+        final_1['away_off'] = final_1['away_off'].replace(['2.1'], '0')
+        final_1['away_def'] = final_1['away_def'].replace(['0.79'], '0')
+        final_1['away_spi'] = final_1['away_spi'].replace(['73.08'], '0')
+        final_1['away_rank'] = final_1['away_rank'].replace(['26'], '0')
+    else:
+        final_1['home_team'] = final_1['home_team'].replace(['Wales'], 'Austria')
+        final_1['home_off'] = final_1['home_off'].replace(['1.78'], '2.1')
+        final_1['home_def'] = final_1['home_def'].replace(['0.71'], '0.79')
+        final_1['home_spi'] = final_1['home_spi'].replace(['69.51'], '73.08')
+        final_1['home_rank'] = final_1['home_rank'].replace(['34'], '26')
+        final_1['away_team'] = final_1['away_team'].replace(['Austria'], ' ')
+        final_1['away_off'] = final_1['away_off'].replace(['2.1'], '0')
+        final_1['away_def'] = final_1['away_def'].replace(['0.79'], '0')
+        final_1['away_spi'] = final_1['away_spi'].replace(['73.08'], '0')
+        final_1['away_rank'] = final_1['away_rank'].replace(['26'], '0')
+        
+        
+        
+    if (scores[0][1] > scores[0][1][1]).any():
+        final_1['away_team'] = final_1['away_team'].replace([' '], 'Scotland')
+        final_1['away_off'] = final_1['away_off'].replace(['0'], '1.7')
+        final_1['away_def'] = final_1['away_def'].replace(['0'], '0.74')
+        final_1['away_spi'] = final_1['away_spi'].replace(['0'], '67.22')
+        final_1['away_rank'] = final_1['away_rank'].replace(['0'], '39')
+    else:
+        final_1['away_team'] = final_1['away_team'].replace([' '], 'Ukraine')
+        final_1['away_off'] = final_1['away_off'].replace(['0'], '1.81')
+        final_1['away_def'] = final_1['away_def'].replace(['0'], '0.86')
+        final_1['away_spi'] = final_1['away_spi'].replace(['0'], '66.47')
+        final_1['away_rank'] = final_1['away_rank'].replace(['0'], '42')
+        
+    
+    final_1_sin = final_1.select_dtypes(include=['int', 'float'])
+    final_1_sin = final_1_sin.drop(columns=['match', 'home_score', 'away_score'])
+    
+    finals_score = []
+    finals_score.append(predict_match(home_clf, final_1_sin))
+    finals_score.append(predict_match(away_clf, final_1_sin))
+    
+    home_team = final_1['home_team']
+    away_team = final_1['away_team']
+    print('')
+    print('{} {} : {} {}'.format(home_team[0], finals_score[0][0], finals_score[1][0], away_team[0]))
+    print('')
+    
+    if (finals_score > finals_score[1]).any():
+        print('{} has qualified!'.format(home_team[0]))
+    else:
+        print('{} has qualified!'.format(away_team[0]))
 
-branch_1 = uefa_matches.drop([3, 5, 8])
-print(branch_1)
-print('')
-
-OFC_matches = pd.read_csv("OFC_matches.csv")
-OFC_matches = OFC_matches.drop([3,5,6,13,14,15])
-print(OFC_matches)
-
-
-CONMEBOL_matches = pd.read_csv("CONMEBOL_matches.csv")
-print(CONMEBOL_matches)
-
-CONCACAF_matches = pd.read_csv("CONCACAF_matches.csv")
-print(CONCACAF_matches)
-
-AFC_matches = pd.read_csv("AFC_matches.csv")
-AFC_matches.drop([24])
-print(AFC_matches)
-
-matches = pd.concat([branch_1, OFC_matches, CONMEBOL_matches, CONCACAF_matches, AFC_matches])
-print(matches)
-
-# branch_1 = branch_1.merge(data_spi, left_on='home_team', right_on='name')
-# print(branch_1)
-
-# branch_1 = branch_1.merge(data_spi, left_on='away_team', right_on='name')
-# print(branch_1)
-
-# branch_1 = branch_1.drop(columns=['confed_x', 'confed_y'])
-
-cols = [['home_off','home_def','home_spi', 'away_off', 'away_def', 'away_spi']]
-for col in cols:
-    matches[col] = scale(matches[col])
-
-print('')
-print("dtc")
-X_pred = preprocess_features(matches)
-match_pred_dtc = predict_match(dtc, X_pred)
-print(match_pred_dtc)
-print('')
-print("svc")
-match_pred_svc = predict_match(svc, X_pred)
-print(match_pred_svc)
-print('')
-print("lg")
-match_pred_lg = predict_match(lg, X_pred)
-print(match_pred_lg)
-print('')
-print("km")
-match_pred_km = predict_match(kmeans, X_pred)
-print(match_pred_km)
-
-
-from sklearn.metrics import accuracy_score
-
-# # Use 5-fold split
-# kf = KFold(5,shuffle=True)
-
-# fold = 1
-# # The data is split five ways, for each fold, the 
-# # Perceptron is trained, tested and evaluated for accuracy
-# for train_index, validate_index in kf.split(X_test,y_test):
-#     dtc.fit(X_test[train_index],y_test[train_index])
-#     y_test = y_test[validate_index]
-#     y_pred = dtc.predict(X_test[validate_index])
-#     #print(y_test)
-#     #print(y_pred)
-#     #print(f"Fold #{fold}, Training Size: {len(trainDF)}, Validation Size: {len(validateDF)}")
-#     print(f"Fold #{fold}, Training Size: {len(X_test[train_index])}, Validation Size: {len(X_test[validate_index])}")
-#     print('Accuracy: %.2f' % accuracy_score(y_test, y_pred))
-#     fold += 1
+predict_uefa(h_dtc, a_dtc, "DTC")
+predict_uefa(h_lg, a_lg, "LG")
+predict_uefa(h_kmeans, a_kmeans, "KMEANS")
+predict_uefa(h_svc, a_svc, "SVC")
