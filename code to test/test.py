@@ -144,7 +144,7 @@ print('Normalized confusion matrix (Logistic Regression)')
 print(cm_normalized)
     
 plt.figure()
-plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5,6,7,8,9,10], title='Normalized confusion matrix')
+plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5,6,7,8,9,10], title='Normalized confusion matrix (Logistic Regression)')
 plt.show()
 print('')
     
@@ -162,7 +162,7 @@ print('Normalized confusion matrix (Support Vector Machine)')
 print(cm_normalized)
     
 plt.figure()
-plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5,6,7,8,9,10], title='Normalized confusion matrix')
+plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5,6,7,8,9,10], title='Normalized confusion matrix (Support Vector Machine)')
 plt.show()
 print('')
     
@@ -180,7 +180,7 @@ print('Normalized confusion matrix (Decision Tree Classifier)')
 print(cm_normalized)
     
 plt.figure()
-plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5,6,7,8,9,10], title='Normalized confusion matrix')
+plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5,6,7,8,9,10], title='Normalized confusion matrix (Decision Tree Classifier)')
 plt.show()
 print('')
     
@@ -198,7 +198,7 @@ print('Normalized confusion matrix (K-Means)')
 print(cm_normalized)
     
 plt.figure()
-plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5,6,7,8,9,10], title='Normalized confusion matrix')
+plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5,6,7,8,9,10], title='Normalized confusion matrix (K-Means)')
 plt.show()
 print('')
     
@@ -224,7 +224,7 @@ print('Normalized confusion matrix (Logistic Regression)')
 print(cm_normalized)
     
 plt.figure()
-plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5,6,7,8,9,10], title='Normalized confusion matrix')
+plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5,6,7,8,9,10], title='Normalized confusion matrix (Logistic Regression)')
 plt.show()
 print('')
     
@@ -242,7 +242,7 @@ print('Normalized confusion matrix (Support Vector Machine)')
 print(cm_normalized)
 
 plt.figure()
-plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5,6,7,8,9,10], title='Normalized confusion matrix')
+plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5,6,7,8,9,10], title='Normalized confusion matrix (Support Vector Machine)')
 plt.show()
 print('')
     
@@ -260,7 +260,7 @@ print('Normalized confusion matrix (Decision Tree Classifier)')
 print(cm_normalized)
     
 plt.figure()
-plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5,6,7,8,9,10], title='Normalized confusion matrix')
+plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5,6,7,8,9,10], title='Normalized confusion matrix (Decision Tree Classifier)')
 plt.show()
 print('')
     
@@ -276,6 +276,11 @@ np.set_printoptions(precision=2)
 cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
 print('Normalized confusion matrix (K-Means)')
 print(cm_normalized)
+
+plt.figure()
+plot_confusion_matrix(cm_normalized, [0,1,2,3,4,5,6,7,8,9,10], title='Normalized confusion matrix (K-Means)')
+plt.show()
+print('')
 
 #-----------------------------------------------------------------------------------------------------------------------
 #UEFA PREDICTIONS
@@ -554,7 +559,7 @@ lg_qt = []
 dtc_qt = []
 svc_qt = []
 km_qt = []
-for i in range(1000):
+for i in range(1):
     #-----------------------------------------------------------------------------------------------------------------------
     #   home score
     #-----------------------------------------------------------------------------------------------------------------------
