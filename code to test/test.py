@@ -17,99 +17,73 @@ from sklearn.cluster import KMeans
 from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
 
+#change to the number of iterations of predictions you want
+#higher values will lead to better statistical analysis about results
+#WARNING: can take very long. 1000 iterations took 30+ hours on my laptop 
+iterations = 1
 
-
-#data = pd.read_excel("merge_maestro.xlsx")
+#matches dataset merged with spi-ratings
 data = pd.read_excel('merging_test.xlsx')
 data = data.drop(columns=['Unnamed: 0'])
-#data_for_matrix = data.drop(columns=['winner'])
-#print(data)
+
+#used to understand the effects of all data values on each other
 pd.plotting.scatter_matrix(data, alpha=0.2, figsize=(10, 10))
-#data = data.drop(data.index[300 : 19385])
 
-# Visualising distribution of data
-
+#create targets for both away and home scores
 X_all = data.drop(columns=['home_score', 'away_score'])
 y_hs_all = data['home_score']
 y_as_all = data['away_score']
 
-# Standardising the data.
-#Center to the mean and component wise scale to unit variance.
-#, 'home_score', 'away_score'
+#Center to the mean and component wise scale to unit variance to increase prediction accuracy
 cols = [['home_off','home_def','home_spi', 'away_off', 'away_def', 'away_spi', 'home_rank', 'away_rank']]
 for col in cols:
     X_all[col] = scale(X_all[col])
     
 X_all = X_all.select_dtypes(include=['int', 'float'])
-
-# Shuffle and split the dataset into training and testing set. (home score)
-X_train, X_test, y_train, y_test = train_test_split(X_all, y_hs_all, 
-                                                    test_size = 0.2,
-                                                    random_state = 15)
-
-# F1 score (also F-score or F-measure) is a measure of a test's accuracy. 
-#It considers both the precision p and the recall r of the test to compute 
-#the score: p is the number of correct positive results divided by the number of 
-#all positive results, and r is the number of correct positive results divided by 
-#the number of positive results that should have been returned. The F1 score can be 
-#interpreted as a weighted average of the precision and recall, where an F1 score 
-#reaches its best value at 1 and worst at 0.
-
-def train_classifier(clf, X_train, y_train):
-    start = time()
-    clf.fit(X_train, y_train)
-    end = time()
     
-    print("Trained model in {:.4f} seconds".format(end - start))
-
+#returns desired score
 def predict_match(clf, match):
     y_pred = clf.predict(match)
     return y_pred
     
+#predicts labels and returns f1 score
 def predict_labels(clf, features, target):
-    ''' Makes predictions using a fit classifier based on F1 score. '''
-    
-    # Start the clock, make predictions, then stop the clock
-    start = time()
     y_pred = clf.predict(features)
-    end = time()
-    # Print and return results
-    print("Made predictions in {:.4f} seconds.".format(end - start))
     
-    return f1_score(target, y_pred, pos_label=1, average='micro'), sum(target == y_pred) / float(len(y_pred)), y_pred
+    return f1_score(target, y_pred, pos_label=1, average='micro')
 
-
+#trains classifier and makes a prediction
 def train_predict(clf, X_train, y_train, X_test, y_test):
-    ''' Train and predict using a classifer based on F1 score. '''
     
-    # Indicate the classifier and the training set size
     print("Training a {} using a training set size of {}. . .".format(clf.__class__.__name__, len(X_train)))
     
-    # Train the classifier
-    train_classifier(clf, X_train, y_train)
+    #train
+    clf.fit(X_train, y_train)
     
-    # Print the results of prediction for both training and testing
+    #predict    
     f1, acc, y_pred = predict_labels(clf, X_train, y_train)
-    print(f1, acc)
-    print("F1 score and accuracy score for training set: {:.4f} , {:.4f}.".format(f1 , acc))
+    
+    #show results
+    print("F1-score for training set: {:.4f} , {:.4f}.".format(f1))
     
     f1, acc, y_pred = predict_labels(clf, X_test, y_test)
-    print("F1 score and accuracy score for test set: {:.4f} , {:.4f}.".format(f1 , acc))
+    print("F1 score for test set: {:.4f} , {:.4f}.".format(f1))
     
     return y_pred
 
-#home 
+#home classifiers
 h_lg = LogisticRegression(random_state = 42)
 h_svc = SVC(random_state = 912, kernel='rbf')
 h_dtc = DecisionTreeClassifier()
 h_kmeans = KMeans(n_clusters=2)
-#away
+#away classifiers
 a_lg = LogisticRegression(random_state = 42)
 a_svc = SVC(random_state = 912, kernel='rbf')
 a_dtc = DecisionTreeClassifier()
 a_kmeans = KMeans(n_clusters=2)
 
 
+#plats a confustion matrix
 def plot_confusion_matrix(cm, names, title='Confusion matrix', cmap=plt.cm.Blues):
     plt.imshow(cm, interpolation='nearest', cmap=cmap)
     plt.title(title)
@@ -124,7 +98,9 @@ def plot_confusion_matrix(cm, names, title='Confusion matrix', cmap=plt.cm.Blues
 #-----------------------------------------------------------------------------------------------------------------------
 #   home score
 #-----------------------------------------------------------------------------------------------------------------------
+#the classifiers are trained to create the confusion matrices and to evaluate performance
 
+#Split into train and test data (home score)
 h_X_train, h_X_test, h_y_train, h_y_test = train_test_split(X_all, y_hs_all, 
                                                                 test_size = 100,
                                                                 random_state = 15)
@@ -205,7 +181,10 @@ print('')
 #-----------------------------------------------------------------------------------------------------------------------
 #   away score
 #-----------------------------------------------------------------------------------------------------------------------
+#the classifiers are trained to create the confusion matrices and to evaluate performance
 
+
+#Split into train and test data (away score)
 a_X_train, a_X_test, a_y_train, a_y_test = train_test_split(X_all, y_as_all, 
                                                                 test_size = 100,
                                                                 random_state = 15)
@@ -287,64 +266,42 @@ print('')
 #-----------------------------------------------------------------------------------------------------------------------
 
 def predict_uefa(home_clf, away_clf, name):
+    #this will store the qualified teams and be the return value
     winners = []
-    #data_spi = pd.read_csv("spi_global_rankings_intl.csv")
     uefa_matches = pd.read_csv("UEFA_matches.csv")
     
+    #split matches into the qualification branches and select only the matches with assigned teams
+    #there are three branches to qualify from, only teams on the same branch can play against each other
     branch_1 = uefa_matches.drop([2, 3, 4, 5, 6, 7, 8])
     branch_2 = uefa_matches.drop([0, 1, 2, 5, 6, 7, 8])
     branch_3 = uefa_matches.drop([0, 1, 2, 3, 4, 5, 8])
+
+    branches = [branch_1, branch_2, branch_3]
+
+    for branch in branches:
+        #remove any data that is not required
+        branch = branch.select_dtypes(include=['int', 'float'])
+        branch = branch.drop(columns=['match', 'home_score', 'away_score'])
+        
+        #scale data to improve predictions
+        cols = [['home_off','home_def','home_spi', 'away_off', 'away_def', 'away_spi']]
+        for col in cols:
+            branch[col] = scale(branch[col])
     
-    branch_1 = branch_1.select_dtypes(include=['int', 'float'])
-    branch_1 = branch_1.drop(columns=['match', 'home_score', 'away_score'])
-    branch_2 = branch_2.select_dtypes(include=['int', 'float'])
-    branch_2 = branch_2.drop(columns=['match', 'home_score', 'away_score'])
-    branch_3 = branch_3.select_dtypes(include=['int', 'float'])
-    branch_3 = branch_3.drop(columns=['match', 'home_score', 'away_score'])
-    print('')
-    
-    branches = [branch_1, branch_1, branch_3]
-    
-    # OFC_matches = pd.read_csv("OFC_matches.csv")
-    # OFC_matches = OFC_matches.drop([3,5,6,13,14,15])
-    
-    # CONMEBOL_matches = pd.read_csv("CONMEBOL_matches.csv")
-    
-    # CONCACAF_matches = pd.read_csv("CONCACAF_matches.csv")
-    
-    # AFC_matches = pd.read_csv("AFC_matches.csv")
-    
-    # matches = pd.concat([branch_1, OFC_matches, CONMEBOL_matches, CONCACAF_matches, AFC_matches])
-    # print(matches)
-    # matches.to_excel('matches_merging_test.xlsx', sheet_name='teams, spi & scores')
-    
-    # branch_1 = branch_1.merge(data_spi, left_on='home_team', right_on='name')
-    # print(branch_1)
-    
-    # branch_1 = branch_1.merge(data_spi, left_on='away_team', right_on='name')
-    # print(branch_1)
-    
-    # branch_1 = branch_1.drop(columns=['confed_x', 'confed_y'])
-    
-    cols = [['home_off','home_def','home_spi', 'away_off', 'away_def', 'away_spi']]
-    for col in cols:
-        branch_1[col] = scale(branch_1[col])
-        branch_2[col] = scale(branch_2[col])
-        branch_3[col] = scale(branch_3[col])
-    
-    
+    #indicate classifier used
     print('')
     print(name)
     
     #branch 1
     home_scores = []
     away_scores = []
+    
+    #predict scores of all matches with predefined teams
     for branch in branches:
-        #home score
         home_scores.append(predict_match(home_clf, branch_1))
-        #away score
         away_scores.append(predict_match(away_clf, branch_1))
     
+    #reformat the way scores are stored so home and away scores are store as a unit, so as a match so to say
     scores = []
     for i in range(len(home_scores)):
         scores.append([home_scores[i], away_scores[i]])
@@ -353,6 +310,7 @@ def predict_uefa(home_clf, away_clf, name):
     final_1 = pd.DataFrame()
     final_1 = uefa_matches.drop([1,2,3,4,5,6,7,8])
     
+    #show prediction outcomes of frist two matches of branch
     home_team = uefa_matches['home_team']
     away_team = uefa_matches['away_team']
     print('')
@@ -361,7 +319,7 @@ def predict_uefa(home_clf, away_clf, name):
     print('{} {} : {} {}'.format(home_team[1], scores[0][1][0], scores[0][1][1], away_team[1]))
     print('')
     
-    
+    #add correct home team to finals
     if (scores[0][0] > scores[0][0][1]).any():
         final_1['away_team'] = final_1['away_team'].replace(['Austria'], ' ')
         final_1['away_off'] = final_1['away_off'].replace(['2.1'], '0')
@@ -380,8 +338,7 @@ def predict_uefa(home_clf, away_clf, name):
         final_1['away_spi'] = final_1['away_spi'].replace(['73.08'], '0')
         final_1['away_rank'] = final_1['away_rank'].replace(['26'], '0')
         
-        
-        
+    #add correct away team to finals
     if (scores[0][1] > scores[0][1][1]).any():
         final_1['away_team'] = final_1['away_team'].replace([' '], 'Scotland')
         final_1['away_off'] = final_1['away_off'].replace(['0'], '1.7')
@@ -395,20 +352,23 @@ def predict_uefa(home_clf, away_clf, name):
         final_1['away_spi'] = final_1['away_spi'].replace(['0'], '66.47')
         final_1['away_rank'] = final_1['away_rank'].replace(['0'], '42')
         
-    
+    #remove data not required
     final_1_sin = final_1.select_dtypes(include=['int', 'float'])
     final_1_sin = final_1_sin.drop(columns=['match', 'home_score', 'away_score'])
     
+    #predict score
     finals_score = []
     finals_score.append(predict_match(home_clf, final_1_sin))
     finals_score.append(predict_match(away_clf, final_1_sin))
     
+    #show score
     home_team = final_1['home_team']
     away_team = final_1['away_team']
     print('')
     print('{} {} : {} {}'.format(home_team[0], finals_score[0][0], finals_score[1][0], away_team[0]))
     print('')
-    
+
+    #show qualifying team
     if (finals_score > finals_score[1]).any():
         print('{} has qualified!'.format(home_team[0]))
         winners.append(home_team[0])
@@ -421,6 +381,7 @@ def predict_uefa(home_clf, away_clf, name):
     final_2 = pd.DataFrame()
     final_2 = uefa_matches.drop([0,1,2,4,5,6,7,8])
     
+    #show outcome of first two matches on branch
     home_team = uefa_matches['home_team']
     away_team = uefa_matches['away_team']
     print('')
@@ -429,6 +390,7 @@ def predict_uefa(home_clf, away_clf, name):
     print('{} {} : {} {}'.format(home_team[4], scores[1][1][0], scores[1][1][1], away_team[4]))
     print('')
     
+    #add correct home team to finals
     if (scores[1][0] > scores[1][0][1]).any():
         final_2['away_team'] = final_2['away_team'].replace(['Poland'], ' ')
         final_2['away_off'] = final_2['away_off'].replace(['2.06'], '0')
@@ -447,6 +409,7 @@ def predict_uefa(home_clf, away_clf, name):
         final_2['away_spi'] = final_2['away_spi'].replace(['72'], '0')
         final_2['away_rank'] = final_2['away_rank'].replace(['28'], '0')
         
+    #add correct away team to finals
     if (scores[1][1] > scores[1][1][1]).any():
         final_2['away_team'] = final_2['away_team'].replace([' '], 'Sweden')
         final_2['away_off'] = final_2['away_off'].replace(['0'], '2.23')
@@ -460,21 +423,23 @@ def predict_uefa(home_clf, away_clf, name):
         final_2['away_spi'] = final_2['away_spi'].replace(['0'], '78.03')
         final_2['away_rank'] = final_2['away_rank'].replace(['0'], '19')
         
-    
+    #remove data not required 
     final_2_sin = final_2.select_dtypes(include=['int', 'float'])
     final_2_sin = final_2_sin.drop(columns=['match', 'home_score', 'away_score'])
     
+    #predict score
     finals_score = []
     finals_score.append(predict_match(home_clf, final_2_sin))
     finals_score.append(predict_match(away_clf, final_2_sin))
     
+    #show match result
     home_team = final_2['home_team']
     away_team = final_2['away_team']
-    
     print('')
     print('{} {} : {} {}'.format(home_team[3], finals_score[0][0], finals_score[1][0], away_team[3]))
     print('')
     
+    #show qualified team
     if (finals_score > finals_score[1]).any():
         print('{} has qualified!'.format(home_team[3]))
         winners.append(home_team[3])
@@ -487,6 +452,7 @@ def predict_uefa(home_clf, away_clf, name):
     final_3 = pd.DataFrame()
     final_3 = uefa_matches.drop([0,1,2,3,4,5,7,8])
     
+    #show outcome of first two matches on branch
     home_team = uefa_matches['home_team']
     away_team = uefa_matches['away_team']
     print('')
@@ -495,7 +461,7 @@ def predict_uefa(home_clf, away_clf, name):
     print('{} {} : {} {}'.format(home_team[7], scores[2][1][0], scores[2][1][1], away_team[7]))
     print('')
     
-    
+    #add correct home team to finals
     if (scores[2][0] > scores[2][0][1]).any():
         final_3['away_team'] = final_3['away_team'].replace(['Turkey'], ' ')
         final_3['away_off'] = final_3['away_off'].replace(['1.95'], '0')
@@ -514,8 +480,7 @@ def predict_uefa(home_clf, away_clf, name):
         final_3['away_spi'] = final_3['away_spi'].replace(['65'], '0')
         final_3['away_rank'] = final_3['away_rank'].replace(['44'], '0')
         
-        
-        
+    #add correct away team to finals
     if (scores[2][1] > scores[2][1][1]).any():
         final_3['away_team'] = final_3['away_team'].replace([' '], 'Italy')
         final_3['away_off'] = final_3['away_off'].replace(['0'], '2.44')
@@ -529,21 +494,23 @@ def predict_uefa(home_clf, away_clf, name):
         final_3['away_spi'] = final_3['away_spi'].replace(['0'], '61.22')
         final_3['away_rank'] = final_3['away_rank'].replace(['0'], '52')
         
-    
+    #remove data not required
     final_3_sin = final_3.select_dtypes(include=['int', 'float'])
     final_3_sin = final_3_sin.drop(columns=['match', 'home_score', 'away_score'])
     
+    #predict score
     finals_score = []
     finals_score.append(predict_match(home_clf, final_3_sin))
     finals_score.append(predict_match(away_clf, final_3_sin))
     
+    #show result
     home_team = final_3['home_team']
     away_team = final_3['away_team']
-    
     print('')
     print('{} {} : {} {}'.format(home_team[6], finals_score[0][0], finals_score[1][0], away_team[6]))
     print('')
     
+    #show qualified team
     if (finals_score > finals_score[1]).any():
         print('{} has qualified!'.format(home_team[6]))
         winners.append(home_team[6])
@@ -552,104 +519,116 @@ def predict_uefa(home_clf, away_clf, name):
         winners.append(away_team[6])
     print('')
     
+    #return the three teams that qualified
     return winners
 
-qualified_teams = []
-lg_qt = []
-dtc_qt = []
-svc_qt = []
-km_qt = []
-for i in range(1):
+#create lists to store winners in, one for each classifier type used and one combined
+#this will be used for graphs
+qualified_teams = []    #combined
+lg_qt = []              #logistic regression
+dtc_qt = []             #decision tree
+svc_qt = []             #support vector machine
+km_qt = []              #k-means
+
+#iterate for how times you want to predict, used for graphing results
+for i in range(iterations):
     #-----------------------------------------------------------------------------------------------------------------------
     #   home score
     #-----------------------------------------------------------------------------------------------------------------------
     
+    #Split into train and test data (home score)
     h_X_train, h_X_test, h_y_train, h_y_test = train_test_split(X_all, y_hs_all, 
                                                                 test_size = 100,
                                                                 random_state = 15)
     
     #logistic regression
     y_pred_lg = train_predict(h_lg, h_X_train, h_y_train, h_X_test, h_y_test)
-    print('')
-    print('LG')
-    print(pd.DataFrame(data=np.c_[h_y_test, y_pred_lg]))
-    print('')
+    # print('')
+    # print('LG')
+    # print(pd.DataFrame(data=np.c_[h_y_test, y_pred_lg]))
+    # print('')
     
     # #SVC
     y_pred_svc = train_predict(h_svc, h_X_train, h_y_train, h_X_test, h_y_test)
-    print('')
-    print('SVC')
-    print(pd.DataFrame(data=np.c_[h_y_test, y_pred_svc]))
-    print ('')
+    # print('')
+    # print('SVC')
+    # print(pd.DataFrame(data=np.c_[h_y_test, y_pred_svc]))
+    # print ('')
     
     #dtc
     y_pred_dtc = train_predict(h_dtc, h_X_train, h_y_train, h_X_test, h_y_test)
-    print('')
-    print('DTC')
-    print(pd.DataFrame(data=np.c_[h_y_test, y_pred_dtc]))
-    print ('')
+    # print('')
+    # print('DTC')
+    # print(pd.DataFrame(data=np.c_[h_y_test, y_pred_dtc]))
+    # print ('')
     
     #k-means
     y_pred_km = train_predict(h_kmeans, h_X_train, h_y_train, h_X_test, h_y_test)
-    print('')
-    print('KMEANS')
-    print(pd.DataFrame(data=np.c_[h_y_test, y_pred_km]))
-    print('')
+    # print('')
+    # print('KMEANS')
+    # print(pd.DataFrame(data=np.c_[h_y_test, y_pred_km]))
+    # print('')
     
     #-----------------------------------------------------------------------------------------------------------------------
     #   away score
     #-----------------------------------------------------------------------------------------------------------------------
     
+    #Split into train and test data (away score)
     a_X_train, a_X_test, a_y_train, a_y_test = train_test_split(X_all, y_as_all, 
                                                                 test_size = 100,
                                                                 random_state = 15)
     
     #logistic regression
     y_pred_lg = train_predict(a_lg, a_X_train, a_y_train, a_X_test, a_y_test)
-    print('')
-    print('LG')
-    print(pd.DataFrame(data=np.c_[a_y_test, y_pred_lg]))
-    print('')
+    # print('')
+    # print('LG')
+    # print(pd.DataFrame(data=np.c_[a_y_test, y_pred_lg]))
+    # print('')
     
     #SVC
     y_pred_svc = train_predict(a_svc, a_X_train, a_y_train, a_X_test, a_y_test)
-    print('')
-    print('SVC')
-    print(pd.DataFrame(data=np.c_[a_y_test, y_pred_svc]))
-    print ('')
+    # print('')
+    # print('SVC')
+    # print(pd.DataFrame(data=np.c_[a_y_test, y_pred_svc]))
+    # print ('')
     
     #dtc
     y_pred_dtc = train_predict(a_dtc, a_X_train, a_y_train, a_X_test, a_y_test)
-    print('')
-    print('DTC')
-    print(pd.DataFrame(data=np.c_[a_y_test, y_pred_dtc]))
-    print ('')
+    # print('')
+    # print('DTC')
+    # print(pd.DataFrame(data=np.c_[a_y_test, y_pred_dtc]))
+    # print ('')
     
     #k-means
     y_pred_km = train_predict(a_kmeans, a_X_train, a_y_train, a_X_test, a_y_test)
-    print('')
-    print('KMEANS')
-    print(pd.DataFrame(data=np.c_[a_y_test, y_pred_km]))
-    print('')
+    # print('')
+    # print('KMEANS')
+    # print(pd.DataFrame(data=np.c_[a_y_test, y_pred_km]))
+    # print('')
     
+    #predict remaining uefa qualifiers using: Decision Tree Classifier
     dtc_results = predict_uefa(h_dtc, a_dtc, "DTC")
     dtc_qt.append(dtc_results)
     qualified_teams.append(dtc_results)
     
+    #predict remaining uefa qualifiers using: Logistic Regression
     lg_results = predict_uefa(h_lg, a_lg, "LG")
     lg_qt.append(lg_results)
     qualified_teams.append(lg_results)
     
+    #predict remaining uefa qualifiers using: K-Means
     km_results = predict_uefa(h_kmeans, a_kmeans, "KMEANS")
     km_qt.append(km_results)
     qualified_teams.append(km_results)
     
+    #predict remaining uefa qualifiers using: Support Vector Machine
     svc_results = predict_uefa(h_svc, a_svc, "SVC")
     svc_qt.append(svc_results)
     qualified_teams.append(svc_results)
     
-    
+#counts the number of times each nation is predicted to qualify    
 def count_winners(winners):
+    #initialise value of all nations to 0
     austria = 0 
     czechia = 0
     italy = 0
@@ -662,6 +641,8 @@ def count_winners(winners):
     turkey = 0
     ukraine = 0
     wales = 0
+    
+    #increases appropriate values
     for set in winners:
         austria += set.count('Austria')
         czechia += set.count('Czech Republic')
@@ -676,16 +657,23 @@ def count_winners(winners):
         ukraine += set.count('Ukraine')
         wales += set.count('Wales')
         
+    #returns a list of the quantifying values in alphabetical order
     return [austria, czechia, italy, north_mcd, poland, portugal, russia, scotland, sweden, turkey, ukraine, wales]
     
 
-#graph how often teams win
+#positions of bars
 x_coords = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120]
 
+#height values of bars for each graph
+#summary
 heights_total = count_winners(qualified_teams)
+#logistic regression
 heights_lg = count_winners(lg_qt)
+#decision tree classifier
 heights_dtc = count_winners(dtc_qt)
+#support vector machine
 heights_svc = count_winners(svc_qt)
+#k-means
 heights_km = count_winners(km_qt)
 
 
