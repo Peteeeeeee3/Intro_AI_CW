@@ -50,7 +50,7 @@ def predict_match(clf, match):
 def predict_labels(clf, features, target):
     y_pred = clf.predict(features)
     
-    return f1_score(target, y_pred, pos_label=1, average='micro')
+    return f1_score(target, y_pred, pos_label=1, average='micro'), y_pred
 
 #trains classifier and makes a prediction
 def train_predict(clf, X_train, y_train, X_test, y_test):
@@ -61,13 +61,14 @@ def train_predict(clf, X_train, y_train, X_test, y_test):
     clf.fit(X_train, y_train)
     
     #predict    
-    f1, acc, y_pred = predict_labels(clf, X_train, y_train)
+    f1, y_pred = predict_labels(clf, X_train, y_train)
     
     #show results
-    print("F1-score for training set: {:.4f} , {:.4f}.".format(f1))
+    print("F1-score for training set: {:.4f}.".format(f1))
     
-    f1, acc, y_pred = predict_labels(clf, X_test, y_test)
-    print("F1 score for test set: {:.4f} , {:.4f}.".format(f1))
+    f1, y_pred = predict_labels(clf, X_test, y_test)
+    print("F1 score for test set: {:.4f}.".format(f1))
+    print(' ')
     
     return y_pred
 
@@ -275,14 +276,18 @@ def predict_uefa(home_clf, away_clf, name):
     branch_1 = uefa_matches.drop([2, 3, 4, 5, 6, 7, 8])
     branch_2 = uefa_matches.drop([0, 1, 2, 5, 6, 7, 8])
     branch_3 = uefa_matches.drop([0, 1, 2, 3, 4, 5, 8])
-
+    
+    #remove any data that is not required
+    branch_1 = branch_1.select_dtypes(include=['int', 'float'])
+    branch_1 = branch_1.drop(columns=['match', 'home_score', 'away_score'])
+    branch_2 = branch_2.select_dtypes(include=['int', 'float'])
+    branch_2 = branch_2.drop(columns=['match', 'home_score', 'away_score'])
+    branch_3 = branch_3.select_dtypes(include=['int', 'float'])
+    branch_3 = branch_3.drop(columns=['match', 'home_score', 'away_score'])
+                             
     branches = [branch_1, branch_2, branch_3]
 
     for branch in branches:
-        #remove any data that is not required
-        branch = branch.select_dtypes(include=['int', 'float'])
-        branch = branch.drop(columns=['match', 'home_score', 'away_score'])
-        
         #scale data to improve predictions
         cols = [['home_off','home_def','home_spi', 'away_off', 'away_def', 'away_spi']]
         for col in cols:
@@ -298,8 +303,8 @@ def predict_uefa(home_clf, away_clf, name):
     
     #predict scores of all matches with predefined teams
     for branch in branches:
-        home_scores.append(predict_match(home_clf, branch_1))
-        away_scores.append(predict_match(away_clf, branch_1))
+        home_scores.append(predict_match(home_clf, branch))
+        away_scores.append(predict_match(away_clf, branch))
     
     #reformat the way scores are stored so home and away scores are store as a unit, so as a match so to say
     scores = []
