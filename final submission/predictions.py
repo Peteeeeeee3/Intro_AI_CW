@@ -23,7 +23,7 @@ import matplotlib.pyplot as plt
 iterations = 1
 
 #matches dataset merged with spi-ratings
-data = pd.read_excel('merging_test.xlsx')
+data = pd.read_excel('matches_and_spi_merged.xlsx')
 data = data.drop(columns=['Unnamed: 0'])
 
 #used to understand the effects of all data values on each other
